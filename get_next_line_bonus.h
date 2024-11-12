@@ -17,7 +17,17 @@
 # include <unistd.h>
 
 # ifndef FD_MAX
-#  define FD_MAX 1
+#  define FD_MAX FOPEN_MAX
+# endif
+
+# if FD_MAX > FOPEN_MAX
+#  undef FD_MAX
+#  define FD_MAX FOPEN_MAX
+# endif
+
+# if FD_MAX < 1
+#  undef FD_MAX
+#  define FD_MAX FOPEN_MAX
 # endif
 
 # ifndef BUFFER_SIZE

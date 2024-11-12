@@ -1,73 +1,51 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
 
+static void read_line (int fd, char **drafts)
+{
+  char *buff;
+  int bytes_read;
+
+  bytes_read = 1;
+  while(bytes_read > 0 && gnl_strchr(drafts[fd], '\n') < 0)
+  {
+    buff = (char *)malloc(BUFFER_SIZE+1);
+    if (!buff)
+      return; //PLZ UPDATE ME
+    bytes_read = read(fd, buff, BUFFER_SIZE);
+    buff[bytes_read] = '\0';
+    drafts[fd] = ft_strjoin(drafts[fd], buff); //this uses malloc
+    free(buff);
+  }
+}
+
+static char *extract_line(int fd, char **drafts)
+{
+  char *line;
+  int nl;
+
+  nl = gnl_strchr(drafts[fd], '\n')
+  if(nl >= 0)
+  {
+    line = ft_substr(drafts[fd], 0, nl + 1); //this usese malloc
+    drafts[fd] = ft_substr(drafts[fd], nl + 1, ft_strlen(drafts[fd]) - nl); //this uses malloc
+  }
+  else
+  {
+    //nl not found in drafts
+    line = drafts[fd];
+    free(drafts[fd]);
+  }
+  return line;
+}
+
+// drafts is  not initialized!!
 char    *get_next_line(int fd)
 {
-    char        *line;
-    static char *buff;
+    static char *drafts[FD_MAX_OPEN];
 
     if (BUFFER_SIZE <= 0 || fd < 0)
         return (NULL);
-    buf = get_buffer(fd, buff);
-    if (!buf)
-        return (NULL);
-    line = get_line(buff);
-    buf = get_remainder(buff);
-    return (line);
-}
-
-char *get_line(char *buff)
-{
-  ssize_t bytes_read;
-  char *nl;
-
-  //join the buff with new read lines
-  //look for new line
-  //split on new line
-  while (bytes_read > 0)
-  {
-    bytes_read = read(fd, buffer, BUFFER_SIZE);
-    buff = ft_strjoin(buff, bytes_read);
-    nl = ft_strch(buff, '\n'); //or 10
-    if (nl)
-    {
-      line = ft_split(buff, '\n')[0];
-    }
-    //add bytes_read to line
-    //if new line encountered return line
-  }
-  //retrun line or NULL
-}
-
-char  *get_remainder(char *buff)
-{
-
-}
-
-char *get_next_line(int fd) {
-    static char buffers[MAX_FD][BUFFER_SIZE];
-    ssize_t bytes_read;
-
-    while (bytes_read > 0)
-    {
-      bytes_read = read(fd, buffer, BUFFER_SIZE);
-
-      //add bytes_read to line
-      //if new line encountered return line
-    }
-
-
-
-//Use read() to fill the buffer for the fd if it doesn’t already contain a complete line.
-//If there is leftover data from a previous call, concatenate it with the newly read data.
-
-
-
-// If there is nothing else to read or if an error occurred, return NULL
-// i.e. if read() returns 0 or -1
-    if (bytes_read <= 0)
-      return NULL;
-    else
-      return line;
+    read_line(fd, drafts);
+    return(extract_line(fd, drafts));
 }
