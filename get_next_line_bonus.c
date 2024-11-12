@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 15:35:34 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/11/06 21:54:26 by ataan            ###   ########.fr       */
+/*   Created: 2024/11/08 19:27:42 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/12 17:49:58 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*get_line(char **line_draft, int fd)
+static char	*extract_line(char **line_draft, int fd)
 {
 	char	*tmp;
 	char	*line;
@@ -57,9 +57,9 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 			free(buff);
 		}
 		else
-			return (get_line(line_draft, fd));
+			return (extract_line(line_draft, fd));
 	}
-	return (get_line(line_draft, fd));
+	return (extract_line(line_draft, fd));
 }
 
 char	*get_next_line(int fd)

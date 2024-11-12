@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 15:35:26 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/11/06 21:55:38 by ataan            ###   ########.fr       */
+/*   Created: 2024/11/08 19:28:19 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/12 17:47:50 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int	ft_strlen(char *str)
 {

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 15:35:46 by mkurkar           #+#    #+#             */
-/*   Updated: 2024/11/06 20:03:40 by ataan            ###   ########.fr       */
+/*   Created: 2024/11/08 19:27:49 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/12 17:50:13 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,7 @@
 # include <unistd.h>
 
 # ifndef FD_MAX
-#  define FD_MAX FOPEN_MAX
-# endif
-
-# if FD_MAX > FOPEN_MAX
-#  undef FD_MAX
-#  define FD_MAX FOPEN_MAX
-# endif
-
-# if FD_MAX < 1
-#  undef FD_MAX
-#  define FD_MAX FOPEN_MAX
+#  define FD_MAX 1
 # endif
 
 # ifndef BUFFER_SIZE
