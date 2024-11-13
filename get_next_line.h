@@ -35,10 +35,10 @@
 # endif
 
 char			*get_next_line(int fd);
-int				ft_strlen(char *str);
-int				ft_strchr(char *str, char ch);
-char			*ft_strdup(char *original);
-char			*ft_strjoin(char *s1, char *s2);
-char			*ft_substr(char *str, int start, int max);
+int	      ft_strlen(char *str);
+char	    *ft_strchr(const char *s, int c);
+char	    *ft_strdup(char *str);
+char	    *ft_strjoin(char const *s1, char const *s2);
+char	    *ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

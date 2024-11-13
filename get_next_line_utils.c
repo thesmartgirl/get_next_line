@@ -24,20 +24,28 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	gnl_strchr(char *str, char ch)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	char	ch;
 
-	i = 0;
-	if (str == NULL)
-		return (-1);
-	while (str[i])
+	ch = (char)c;
+	if (ch == '\0')
 	{
-		if (str[i] == ch)
-			return (i);
-		i++;
+		while (*s != '\0')
+		{
+			s++;
+		}
+		return ((char *)s);
 	}
-	return (-1);
+	while (*s != '\0')
+	{
+		if (*s == ch)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == c)
+		return ((char *)s);
+	return ((char *) NULL);
 }
 
 char	*ft_strdup(char *str)
