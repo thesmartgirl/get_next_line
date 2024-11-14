@@ -5,72 +5,98 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 19:28:41 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/12 20:12:36 by ataan            ###   ########.fr       */
+/*   Created: 2024/11/08 19:28:19 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/14 20:15:58 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
-static char	*extract_line(char **line_draft, int fd)
+static void	read_line(int fd, char **drafts)
 {
+	char	*buff;
+	int		bytes_read;
 	char	*tmp;
-	char	*line;
-	int		i;
-
-	if (!line_draft[fd])
-		return (NULL);
-	tmp = line_draft[fd];
-	i = ft_strchr(line_draft[fd], '\n');
-	if (i == -1)
-	{
-		if (ft_strlen(line_draft[fd]) == 0)
-			return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
-		line = ft_strdup(line_draft[fd]);
-		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
-	}
-	line = ft_substr(tmp, 0, i + 1);
-	if (line == NULL)
-		return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
-	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
-	return (free(tmp), line);
-}
-
-static char	*read_line(char *buff, char **line_draft, int fd)
-{
-	int	bytes_read;
-
+	
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return ;
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
-		if (ft_strchr(line_draft[fd], '\n') == -1)
-		{
-			buff = (char *)malloc(BUFFER_SIZE + 1);
-			if (buff == NULL)
-				return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
-			bytes_read = read(fd, buff, BUFFER_SIZE);
-			if (bytes_read == -1)
-				return (free(buff), free(line_draft[fd]), line_draft[fd] = NULL,
-					NULL);
-			buff[bytes_read] = '\0';
-			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
-			free(buff);
-		}
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			return (free(buff));
+		buff[bytes_read] = '\0';
+		tmp = drafts[fd];
+		if (!drafts[fd]) // first try not used before, == NULL
+			drafts[fd] = ft_strdup(buff);
 		else
-			return (extract_line(line_draft, fd));
+			drafts[fd] = ft_strjoin(drafts[fd], buff);
+		free(tmp);
+		if (ft_strchr(drafts[fd], '\n'))
+			break ;
 	}
-	return (extract_line(line_draft, fd));
+	free(buff);
 }
+static char	*extract_line(char *draft)
+{
+  int i;
+  
+  i = 0;
+  if (ft_strchr(draft, '\n'))
+  {
+	while (draft[i] != '\n')
+  		i++;
+	return(ft_substr(draft, 0, i + 1));
+  }
+  return (ft_strdup(draft));
+}
+
+// static char	*extract_line(int fd, char *drafts)
+// {
+// 	char	*line;
+// 	char	*tmp;
+// 	int		i;
+
+// 	i = 0;
+// 	if (ft_strchr(drafts[fd], '\n')) // new line exists in drafts
+// 	{
+// 		while (drafts[fd][i] != '\n')
+// 			i++;
+// 		line = ft_substr(drafts[fd], 0, i + 1); // this usese malloc
+// 		tmp = drafts[fd];
+// 		drafts[fd] = ft_substr(drafts[fd], i + 1, (ft_strlen(drafts[fd])
+// 					- ft_strlen(line))); // this uses malloc
+// 		free(tmp);
+// 	}
+// 	else // nl not found in drafts
+// 	{
+// 		line = ft_strdup(drafts[fd]);
+// 		free(drafts[fd]);
+// 		drafts[fd] = NULL;
+// 	}
+// 	return (line);
+// }
 
 char	*get_next_line(int fd)
 {
-	char		*buff;
-	static char	*line_draft[FOPEN_MAX];
-
-	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+	static char	*drafts[FOPEN_MAX];
+	char *line;
+	char *tmp;
+  
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
 		return (NULL);
-	if (line_draft[fd] == NULL)
-		line_draft[fd] = ft_strdup("");
-	buff = NULL;
-	return (read_line(buff, line_draft, fd));
+	read_line(fd, drafts);
+	if (!drafts[fd] || drafts[fd][0] == '\0')
+		return (NULL); // No more data to read
+	line = extract_line(drafts[fd]);
+	tmp = drafts[fd];
+	drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), (ft_strlen(drafts[fd])
+						- ft_strlen(line)));
+	free(tmp);
+	return (line);
 }

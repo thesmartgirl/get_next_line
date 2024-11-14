@@ -6,15 +6,15 @@
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:28:19 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/12 17:47:50 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/14 14:54:16 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (str == NULL)
@@ -45,10 +45,10 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (*s == c)
 		return ((char *)s);
-	return ((char *) NULL);
+	return ((char *)NULL);
 }
 
-char	*ft_strdup(char *str)
+char	*ft_strdup(const char *str)
 {
 	char	*new_str;
 	int		i;

@@ -1,12 +1,9 @@
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 // int	main(void)
 // {
@@ -27,56 +24,55 @@
 // 	// get_next_line(0);
 // }
 
-
-// int	main(void)
-// {
-// 	int fd1, fd2, fd3;
-// 	fd1 = open("file3.txt", O_RDWR);
-// 	fd2 = open("file2.txt", O_RDWR);
-// 	fd3 = open("file3.txt", O_RDWR);
-// 	// cget_next_line(fd2);
-// 	// get_next_line(fd1);
-// 	write(fd3, get_next_line(fd1), 5);
-// 	// printf("get_next_line: |%s", line11);
-// 	// printf("get_next_line: |%s", line21);
-// 	// printf("get_next_line: |%s", line12);
-// 	// get_next_line(0);
-// 	// free(line11);
-// 	// free(line12);
-// 	// free(line21);
-// 	close(fd1);
-// 	close(fd2);
-// 	return (0);
-// }
-
-int main(void)
+int	main(void)
 {
-    int fd1, fd3;
-    char *line;
+	int		fd1;
+	char	*line;
 
-    fd1 = open("file1.txt", O_RDWR);
-    if (fd1 == -1) {
-        perror("Error opening file3.txt");
-        return 1;
-    }
-
-    fd3 = open("file3.txt", O_RDWR);  // Or any other file where you want to write
-    if (fd3 == -1) {
-        perror("Error opening file3.txt for writing");
-        close(fd1);
-        return 1;
-    }
-
-    // Read a line from fd1 and write to fd3
-    line = get_next_line(fd1);
-    if (line != NULL) {
-        write(fd3, line, 6);  // Write the first 5 characters of the line to fd3
-        free(line);  // Free the allocated memory
-    }
-
-    // Close the file descriptors
-    close(fd1);
-    close(fd3);
-
-    return 0;
+	fd1 = open("123.txt", O_RDONLY);
+	line = get_next_line(fd1);
+	printf("get_next_line: |%s", line);
+	free(line);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
+	close(fd1);
+	return (0);
 }
+
+/*
+int	main(void)
+{
+	int fd1, fd3;
+	char *line;
+
+	fd1 = open("file1.txt", O_RDWR);
+	if (fd1 == -1) {
+		perror("Error opening file3.txt");
+		return (1);
+	}
+
+	fd3 = open("file3.txt", O_RDWR); 
+		// Or any other file where you want to write
+	if (fd3 == -1) {
+		perror("Error opening file3.txt for writing");
+		close(fd1);
+		return (1);
+	}
+
+	// Read a line from fd1 and write to fd3
+	line = get_next_line(fd1);
+	if (line != NULL) {
+		write(fd3, line, 6);  // Write the first 5 characters of the line to fd3
+		free(line);  // Free the allocated memory
+	}
+
+	// Close the file descriptors
+	close(fd1);
+	close(fd3);
+
+	return (0);
+}*/

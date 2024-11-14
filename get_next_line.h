@@ -6,7 +6,7 @@
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:28:52 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/08 19:28:54 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/14 15:01:29 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 # endif
 
 char			*get_next_line(int fd);
-int	      ft_strlen(char *str);
+size_t	        ft_strlen(const char *str);
 char	    *ft_strchr(const char *s, int c);
-char	    *ft_strdup(char *str);
+char	    *ft_strdup(const char *str);
 char	    *ft_strjoin(char const *s1, char const *s2);
 char	    *ft_substr(char const *s, unsigned int start, size_t len);
 
