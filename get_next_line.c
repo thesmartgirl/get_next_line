@@ -6,25 +6,17 @@
 static int read_line(int fd, char *buff, char **saved)
 {
 	int bytes_read;
-	// char *temp;
 
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
-		if (bytes_read == 0) { //empty file or EOF
+		if (bytes_read == 0)
 			break;
-		}
-		if (bytes_read < 0) { //error reading
-			// printf("bytes_read < 0\n" );
-			// free(saved);
+		if (bytes_read < 0)
 			return 1;
-		}
 		buff[bytes_read] = '\0';
-		// temp = *saved;
 		*saved = ft_strjoin(*saved, buff);
-		// free(temp);
-		// printf("saved after read_line = %s", *saved );
 	}
 	return 0;
 }
@@ -37,12 +29,10 @@ static	char *extract_line(const char *saved)
 	nl = 0;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
-
 	if (nl > 0 || saved[0] == '\n')
 		line = ft_substr(saved, 0, nl+1);
 	else
 		line = ft_strdup(saved);
-
 	return line;
 }
 
@@ -53,13 +43,7 @@ static	char *update_saved( char *saved, const size_t line_len)
 
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
-	{
-		// if (saved)
-		// {
-		// 	free(saved);
-		// }
 		return NULL;
-	}
 	updated = ft_substr(saved, line_len, updated_len);
 	return updated;
 }
@@ -74,22 +58,17 @@ char	*get_next_line(int fd)
 		buff = (char *)malloc(BUFFER_SIZE + 1);
 		if(!buff)
 			return NULL;
-
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
 		if (!read_line(fd, buff, &saved))
-    	// if (ft_strchr(saved, '\n'))
-			// {
-				if (ft_strlen(saved) > 0)
+				if (saved[0] != '\0')
 				{
-					// printf("hello\n" );
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
-			// }
 		free(buff);
     return line;
 }
