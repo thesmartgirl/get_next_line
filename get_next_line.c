@@ -17,7 +17,6 @@
 
 static void	read_line(int fd, char **draft, char **buff)
 {
-	char	*buff;
 	int		bytes_read;
 	char	*tmp;
 
