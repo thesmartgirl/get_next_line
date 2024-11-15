@@ -97,7 +97,6 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	return (str);
 }
 
-/*
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -120,30 +119,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	res[i] = '\0';
 	return (res);
-}*/
-char	*ft_substr(const char *str, unsigned int start, size_t size)
-{
-	char	*new_str;
-	size_t		len;
-	size_t		i;
-
-	if (str == NULL)
-		return (NULL);
-	if (start > ft_strlen(str))
-		return (ft_strdup(""));
-	len = ft_strlen(&str[start]);
-	if (len < size)
-		size = len;
-	new_str = malloc((size + 1) * sizeof(char));
-	if (new_str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		new_str[i] = str[start];
-		start++;
-		i++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
 }

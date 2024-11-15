@@ -3,9 +3,10 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-static int read_line(int fd, char *buff, char **saved)
+static int read_line(int fd, char **saved)
 {
 	int bytes_read;
+	char *buff;
 
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if(!buff)
@@ -65,11 +66,11 @@ char	*get_next_line(int fd)
 		char *buff;
 		char *temp;
 
-		buff = NULL;
+		// buff = NULL;
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
-		if (!read_line(fd, buff, &saved))
+		if (!read_line(fd, &saved))
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
