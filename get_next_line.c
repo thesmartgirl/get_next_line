@@ -16,7 +16,7 @@ static int read_line(int fd, char *buff, char **saved)
 			break;
 		}
 		if (bytes_read < 0) { //error reading
-			printf("bytes_read < 0\n" );
+			// printf("bytes_read < 0\n" );
 			// free(saved);
 			return 1;
 		}
@@ -24,7 +24,7 @@ static int read_line(int fd, char *buff, char **saved)
 		// temp = *saved;
 		*saved = ft_strjoin(*saved, buff);
 		// free(temp);
-		printf("saved after read_line = %s", *saved );
+		// printf("saved after read_line = %s", *saved );
 	}
 	return 0;
 }
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 			// {
 				if (ft_strlen(saved) > 0)
 				{
-					printf("hello\n" );
+					// printf("hello\n" );
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
