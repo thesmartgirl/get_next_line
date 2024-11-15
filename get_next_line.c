@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 	//4- update static variable for next call
 	tmp = draft;
 	len_remaining = (ft_strlen(draft) - ft_strlen(line));
-	draft = ft_substr(draft, ft_strlen(line), len_remaining);
+	draft = ft_substr(tmp, ft_strlen(line), len_remaining);
 
 	//5- Free Resources
 	free(tmp);
