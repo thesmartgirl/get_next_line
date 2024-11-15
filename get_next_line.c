@@ -16,9 +16,7 @@ static int read_line(int fd, char *buff, char **saved)
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		buff[bytes_read] = '\0';
 		temp = *saved;
-		// printf("b4 strjoin saved = %s, buff = %s", *saved, buff );
 		*saved = ft_strjoin(*saved, buff);
-		// printf("saved from read_line: %s", *saved);
 		free(temp);
 		if (bytes_read == 0) { //empty file or EOF
 			// printf("bytes_read == 0\n" );
@@ -63,7 +61,9 @@ static	char *update_saved(const char *saved, const size_t line_len)
 	printf("updated_len = %ld\n", updated_len );
 
 	if (updated_len <= 0)
-		return NULL;
+	{
+		free(saved);
+		return NULL;}
 	updated = ft_substr(saved, line_len, updated_len);
 	return updated;
 }
