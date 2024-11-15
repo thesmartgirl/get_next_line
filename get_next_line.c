@@ -7,6 +7,7 @@
 char *extract_line(char **saved_data)
 {
     size_t i;
+		char *line;
 
 		i = 0;
     while ((*saved_data)[i] != '\n' && (*saved_data)[i] != '\0')
@@ -88,7 +89,7 @@ char *get_next_line(int fd)
     free(buff);
 
     // Extract the line from saved_data
-    char *line = extract_line(&saved_data);
+    line = extract_line(&saved_data);
     if (!line)
         return NULL;
 
