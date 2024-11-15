@@ -97,7 +97,10 @@ char	*get_next_line(int fd)
 				}
 			}
 		if (!saved)
+		{
+			printf("freeing saved from gnl\n" );
 			free(saved);
+		}
 
 		free(temp);
 		free(buff);
