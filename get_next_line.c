@@ -28,7 +28,7 @@ static int read_line(int fd, char *buff, char **saved)
 	return 0;
 }
 
-static	char *extract_line(char *saved)
+static	char *extract_line(const char *saved)
 {
 	char *line;
 	int nl;
@@ -39,10 +39,7 @@ static	char *extract_line(char *saved)
 	if (nl > 0 || saved[0] == '\n')
 		line = ft_substr(saved, 0, nl+1);
 	else
-	{
 		line = ft_strdup(saved);
-		free(saved);
-	}
 	return line;
 }
 
@@ -77,6 +74,8 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
+		else
+			free(saved);
 		free(buff);
     return line;
 }
