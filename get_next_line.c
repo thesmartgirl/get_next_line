@@ -55,7 +55,10 @@ char	*get_next_line(int fd)
         return (NULL); // Memory allocation failure
 
     if(!read_line(fd, &drafts[fd], buff))
+		{
+			free(buff);
 			return NULL;
+		}
 		else
 		{
 	    if (!drafts[fd] || drafts[fd][0] == '\0')
