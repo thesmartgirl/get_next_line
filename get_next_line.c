@@ -69,7 +69,7 @@ char	*get_next_line(int fd)
 		temp = saved;
 
 		if (!saved || !ft_strchr(saved, '\n'))
-    	if (!read_line(fd, buff, &saved))
+    	if (!read_line(fd, &buff, &saved))
         line = extract_line(saved);
 
 		saved = update_saved(saved, ft_strlen(line));
