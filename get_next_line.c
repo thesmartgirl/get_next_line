@@ -26,8 +26,8 @@ static int read_line(int fd, char *buff, char **saved)
 		}
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
+		free(buff);
 	}
-	free(buff);
 	return 0;
 }
 
