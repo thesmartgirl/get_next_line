@@ -6,8 +6,7 @@
 static int read_line(int fd, char *buff, char **saved)
 {
 	int bytes_read;
-	char *temp;
-
+	// char *temp;
 
 	bytes_read = 1;
 	while (bytes_read > 0)
