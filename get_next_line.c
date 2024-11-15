@@ -66,13 +66,14 @@ char	*get_next_line(int fd)
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
-		if (!read_line(fd, buff, &saved) && (saved[0] != '\0') )
-		{
+		if (!read_line(fd, buff, &saved))
+				if (saved[0] != '\0')
+				{
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
-		}
+				}
 		free(buff);
     return line;
 }
