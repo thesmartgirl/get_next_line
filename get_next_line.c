@@ -86,7 +86,8 @@ char	*get_next_line(int fd)
     	if (!read_line(fd, buff, &saved))
         line = extract_line(saved);
 
-		saved = update_saved(saved, ft_strlen(line));
+		if(!line)
+			saved = update_saved(saved, ft_strlen(line));
 		if (!saved)
 			free(saved);
 
