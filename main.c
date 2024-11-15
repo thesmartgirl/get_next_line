@@ -30,12 +30,12 @@ int	main(void)
 	char	*line;
 
 	fd1 = open("nl", O_RDONLY);
-	line = get_next_line(fd1);
+	line = get_next_line(-1);
 	printf("get_next_line: |%s", line);
 	free(line);
-	line = get_next_line(fd1);
-	printf("get_next_line: |%s", line);
-	free(line);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
 
 	// line = get_next_line(fd1);
 	// printf("get_next_line: |%s", line);
