@@ -9,7 +9,7 @@ static int read_line(int fd, char *buff, char **saved)
 	// char *temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(saved, '\n'))
+	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0) { //empty file or EOF
