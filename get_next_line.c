@@ -33,6 +33,7 @@ static int	read_line(int fd, char **draft, char *buff)
 			*draft = ft_strdup(buff);
 		else
 			*draft = ft_strjoin(*draft, buff);
+		printf("read_line draft = %s\n", *draft);
 		if (ft_strchr(*draft, '\n'))
 			break ;
 	}
