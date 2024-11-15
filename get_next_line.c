@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 	//5- Free Resources
 	free(tmp);
 	free(buff);
-	// printf("draft = %s\n", draft);
-	// printf("line = %s\n", line);
+	printf("draft = %s\n", draft);
+	printf("line = %s\n", line);
 	return (line);
 }
