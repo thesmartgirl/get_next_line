@@ -77,8 +77,8 @@ char	*get_next_line(int fd)
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
-		if (!ft_strchr(saved, '\n'))
-    	if (!read_line(fd, buff, &saved))
+		if (!read_line(fd, buff, &saved))
+    	if (!ft_strchr(saved, '\n'))
 			{
 				if (ft_strlen(saved) > 0)
 				{
