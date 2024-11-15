@@ -63,8 +63,12 @@ static	char *update_saved( char *saved, const size_t line_len)
 	if (updated_len <= 0)
 	{
 		if (saved)
+		{
+			printf("freeing saved from update_saved\n" );
 			free(saved);
-		return NULL;}
+		}
+		return NULL;
+	}
 	updated = ft_substr(saved, line_len, updated_len);
 	return updated;
 }
