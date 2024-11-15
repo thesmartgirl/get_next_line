@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static int	read_line(int fd, char **draft, char *buff)
+static char	*read_line(int fd, char **draft, char *buff)
 {
 	int		bytes_read;
 	char 	*tmp;
@@ -25,9 +25,10 @@ static int	read_line(int fd, char **draft, char *buff)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read <= 0)
-			return 0;
-		if (bytes_read == 0) {
-			break;
+		{
+			if(draft)
+				free(draft);
+			return (NULL);
 		}
 		buff[bytes_read] = '\0';
 		tmp = *draft;
@@ -40,7 +41,7 @@ static int	read_line(int fd, char **draft, char *buff)
 		if (ft_strchr(*draft, '\n'))
 			break ;
 	}
-	return 1;
+	return draft;
 }
 
 static char	*extract_line(char *draft)
@@ -66,20 +67,30 @@ char	*get_next_line(int fd)
 	char *buff;
 	size_t len_remaining;
 
+	// 1- allocate buffer
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
 		return (NULL);
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
 			return NULL;
-	if (!read_line(fd, &draft, buff))
+
+	//2- read line
+	draft = read_line(fd, &draft, buff);
+	if (!draft)
 	{
 		free(buff);
 		return (NULL); // No more data to read
 	}
+
+	//3- extract line
 	line = extract_line(draft);
+
+	//4- update static variable for next call
 	tmp = draft;
 	len_remaining = (ft_strlen(draft) - ft_strlen(line));
 	draft = ft_substr(draft, ft_strlen(line), len_remaining);
+
+	//5- Free Resources
 	free(tmp);
 	free(buff);
 	// printf("draft = %s\n", draft);
