@@ -77,5 +77,7 @@ char	*get_next_line(int fd)
 	draft = ft_substr(draft, ft_strlen(line), len_remaining);
 	free(tmp);
 	free(buff);
+	printf("line = %s\n", line);
+	printf("draft = %s\n", draft);
 	return (line);
 }
