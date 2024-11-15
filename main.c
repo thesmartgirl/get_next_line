@@ -29,7 +29,19 @@ int	main(void)
 	int		fd1;
 	char	*line;
 
-	fd1 = open("nl", O_RDONLY);
+	fd1 = open("multiple_nlx5", O_RDONLY);
+	line = get_next_line(fd1);
+	printf("get_next_line: |%s", line);
+	free(line);
+	line = get_next_line(fd1);
+	printf("get_next_line: |%s", line);
+	free(line);
+	line = get_next_line(fd1);
+	printf("get_next_line: |%s", line);
+	free(line);
+	line = get_next_line(fd1);
+	printf("get_next_line: |%s", line);
+	free(line);
 	line = get_next_line(fd1);
 	printf("get_next_line: |%s", line);
 	free(line);
