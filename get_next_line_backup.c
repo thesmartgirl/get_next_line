@@ -23,11 +23,8 @@ static int	read_line(int fd, char **draft, char *buff)
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
-		if (bytes_read < 0)
+		if (bytes_read <= 0)
 			return 0;
-		if (bytes_read == 0) {
-			break;
-		}
 		buff[bytes_read] = '\0';
 		if (!*draft) // first try not used before, == NULL
 			*draft = ft_strdup(buff);
@@ -44,37 +41,36 @@ static char	*extract_line(char *draft)
   int i;
 
   i = 0;
-  while (draft[i] != '\0')
+  if (ft_strchr(draft, '\n'))
   {
-		if (draft[i] != '\n')
-			return(ft_substr(draft, 0, i + 1));
-	  i++;
-	 }
+	while (draft[i] != '\n')
+  		i++;
+	return(ft_substr(draft, 0, i + 1));
+  }
   return (ft_strdup(draft));
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*draft;
+	static char	*drafts[FOPEN_MAX];
 	char *line;
 	char *tmp;
 	char *buff;
-	size_t len_remaining;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
 		return (NULL);
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
 			return NULL;
-	if (!read_line(fd, &draft, buff))
+	if (!read_line(fd, &drafts[fd], buff))
 	{
 		free(buff);
 		return (NULL); // No more data to read
 	}
-	line = extract_line(draft);
-	tmp = draft;
-	len_remaining = (ft_strlen(draft) - ft_strlen(line));
-	draft = ft_substr(draft, ft_strlen(line), len_remaining);
+	line = extract_line(drafts[fd]);
+	tmp = drafts[fd];
+	drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), (ft_strlen(drafts[fd])
+						- ft_strlen(line)));
 	free(tmp);
 	free(buff);
 	return (line);
