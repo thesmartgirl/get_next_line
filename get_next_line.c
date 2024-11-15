@@ -79,6 +79,7 @@ char	*get_next_line(int fd)
 	if (!draft)
 	{
 		free(buff);
+		free(draft);
 		return (NULL); // No more data to read
 	}
 
