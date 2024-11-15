@@ -39,7 +39,7 @@ static	char *extract_line(const char *saved)
 	char *line;
 	int nl;
 
-	printf("saved = %s", saved );
+	// printf("saved = %s", saved );
 	nl = 0;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
