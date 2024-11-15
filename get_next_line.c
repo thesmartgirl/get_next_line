@@ -15,6 +15,7 @@ static int read_line(int fd, char *buff, char **saved)
 		printf("Hello read_line\n");
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		temp = *saved;
+		printf("b4 strjoin saved = %s, buff = %s\n", *saved, buff );
 		*saved = ft_strjoin(*saved, buff);
 		printf("saved from read_line: %s", *saved);
 		free(temp);
