@@ -63,10 +63,8 @@ char	*get_next_line(int fd)
 {
     static char *saved = NULL;
 		char *line;
-		// char *buff;
 		char *temp;
 
-		// buff = NULL;
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
@@ -78,6 +76,5 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
-		// free(buff);
     return line;
 }
