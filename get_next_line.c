@@ -69,12 +69,12 @@ char *get_next_line(int fd)
         free(temp);
         if (!saved_data)
         {
-            free(buff);
+            // free(buff);
             return NULL; // Memory allocation failure
         }
     }
 
-    // free(buff);
+    free(buff);
 
     // Extract the line from saved_data
     char *line = extract_line(&saved_data);
