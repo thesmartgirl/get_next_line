@@ -31,13 +31,13 @@ static void	read_line(int fd, char **draft)
 		if (bytes_read <= 0)
 			return (free(buff));
 		buff[bytes_read] = '\0';
-		tmp = draft;
-		if (!draft) // first try not used before, == NULL
-			draft = ft_strdup(buff);
+		tmp = *draft;
+		if (!*draft) // first try not used before, == NULL
+			*draft = ft_strdup(buff);
 		else
-			draft = ft_strjoin(draft, buff);
+			*draft = ft_strjoin(*draft, buff);
 		free(tmp);
-		if (ft_strchr(draft, '\n'))
+		if (ft_strchr(*draft, '\n'))
 			break ;
 	}
 	free(buff);
