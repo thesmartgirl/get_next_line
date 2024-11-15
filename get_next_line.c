@@ -31,7 +31,11 @@ static int	read_line(int fd, char **draft, char *buff)
 		}
 		buff[bytes_read] = '\0';
 		if (!*draft) // first try not used before, == NULL
+		{
+			tmp = *draft;
 			*draft = ft_strdup(buff);
+			free(tmp);
+		}
 		else
 		{
 			tmp = *draft;
