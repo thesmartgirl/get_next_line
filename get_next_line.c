@@ -87,6 +87,8 @@ char	*get_next_line(int fd)
         line = extract_line(saved);
 
 		saved = update_saved(saved, ft_strlen(line));
+		if (!saved)
+			free(saved);
 
 		free(temp);
 		free(buff);
