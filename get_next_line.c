@@ -83,6 +83,7 @@ char	*get_next_line(int fd)
 			{
 				if (ft_strlen(saved) > 0)
 				{
+					printf("hello\n" );
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
