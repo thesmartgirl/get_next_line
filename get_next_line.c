@@ -63,7 +63,10 @@ char	*get_next_line(int fd)
 	if (!buff)
 			return NULL;
 	if (read_line(fd, &drafts[fd], buff))
+	{
+		free(buff);
 		return (NULL); // No more data to read
+	}
 	line = extract_line(drafts[fd]);
 	tmp = drafts[fd];
 	drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), (ft_strlen(drafts[fd])
