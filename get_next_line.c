@@ -16,7 +16,7 @@ static int read_line(int fd, char *buff, char **saved)
 		if (bytes_read < 0)
 			return 1;
 		buff[bytes_read] = '\0';
-		*saved = ft_strjoin(*saved, buff);
+		*saved = gnl_strjoin(*saved, buff);
 	}
 	return 0;
 }
@@ -27,7 +27,7 @@ static	char *extract_line(const char *saved)
 	int nl;
 
 	nl = 0;
-	while (saved[nl] != '\0' && saved[nl] != '\n')
+	while (saved[nl] != '\n' && saved[nl] != '\0')
 		nl++;
 	if (nl > 0 || saved[0] == '\n')
 		line = ft_substr(saved, 0, nl+1);

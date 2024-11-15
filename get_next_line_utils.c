@@ -68,7 +68,7 @@ char	*ft_strdup(const char *str)
 	return (new_str);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*gnl_strjoin(char *s1, char const *s2)
 {
 	char	*res;
 	size_t	i;
