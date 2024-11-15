@@ -15,15 +15,12 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static void	read_line(int fd, char **draft)
+static void	read_line(int fd, char **draft, char **buff)
 {
 	char	*buff;
 	int		bytes_read;
 	char	*tmp;
 
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buff)
-		return ;
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
@@ -42,6 +39,7 @@ static void	read_line(int fd, char **draft)
 	}
 	free(buff);
 }
+
 static char	*extract_line(char *draft)
 {
   int i;
@@ -56,7 +54,7 @@ static char	*extract_line(char *draft)
   return (ft_strdup(draft));
 }
 
-// static char	*extract_line(int fd, char *drafts)
+/* static char	*extract_line(int fd, char *drafts)
 // {
 // 	char	*line;
 // 	char	*tmp;
@@ -80,17 +78,21 @@ static char	*extract_line(char *draft)
 // 		drafts[fd] = NULL;
 // 	}
 // 	return (line);
-// }
+// }*/
 
 char	*get_next_line(int fd)
 {
 	static char	*drafts[FOPEN_MAX];
 	char *line;
 	char *tmp;
+	char *buff;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
 		return (NULL);
-	read_line(fd, &drafts[fd]);
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buff)
+			return NULL;
+	read_line(fd, &drafts[fd], &buff);
 	if (!drafts[fd] || drafts[fd][0] == '\0')
 		return (NULL); // No more data to read
 	line = extract_line(drafts[fd]);
