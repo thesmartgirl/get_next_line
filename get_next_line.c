@@ -41,7 +41,7 @@ static char	*read_line(int fd, char **draft, char *buff)
 		if (ft_strchr(*draft, '\n'))
 			break ;
 	}
-	return draft;
+	return *draft;
 }
 
 static char	*extract_line(char *draft)
