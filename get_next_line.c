@@ -74,7 +74,7 @@ char *get_next_line(int fd)
         }
     }
 
-    free(buff);
+    // free(buff);
 
     // Extract the line from saved_data
     char *line = extract_line(&saved_data);
