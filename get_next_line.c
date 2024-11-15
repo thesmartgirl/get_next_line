@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
-			}
+		}
 		else
 			free(saved);
 		free(buff);
