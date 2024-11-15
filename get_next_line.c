@@ -19,7 +19,7 @@ static int	read_line(int fd, char **draft, char *buff)
 {
 	int		bytes_read;
 	char 	*tmp;
-	
+
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
@@ -34,7 +34,7 @@ static int	read_line(int fd, char **draft, char *buff)
 			*draft = ft_strdup(buff);
 		else
 		{
-			tmp = draft;
+			tmp = *draft;
 			*draft = ft_strjoin(*draft, buff);
 			free(tmp);
 		}
