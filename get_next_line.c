@@ -20,7 +20,7 @@ static int read_line(int fd, char *buff, char **saved)
 		free(temp);
 		if (bytes_read == 0) { //empty file or EOF
 			printf("bytes_read == 0\n" );
-			return 1;
+			break;
 		}
 		if (bytes_read < 0) { //error reading
 			printf("bytes_read < 0\n" );
