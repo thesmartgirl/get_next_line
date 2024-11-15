@@ -43,7 +43,7 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
-		if (!ft_strchr(line_draft[fd], '\n'))
+		if (ft_strchr(line_draft[fd], '\n') == -1)
 		{
 			buff = (char *)malloc(BUFFER_SIZE + 1);
 			if (buff == NULL)
