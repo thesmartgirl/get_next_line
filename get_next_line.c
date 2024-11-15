@@ -62,7 +62,7 @@ char	*get_next_line(int fd)
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
 			return NULL;
-	if (!read_line(fd, &drafts[fd], buff))
+	if (read_line(fd, &drafts[fd], buff))
 		return (NULL); // No more data to read
 	line = extract_line(drafts[fd]);
 	tmp = drafts[fd];
