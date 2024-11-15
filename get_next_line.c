@@ -9,7 +9,10 @@ static int read_line(int fd, char *buff, char **saved)
 
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if(!buff)
+	{
+		free(saved);
 		return 1;
+	}
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
