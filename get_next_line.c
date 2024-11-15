@@ -2,44 +2,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-// Function to find the length of a string
-size_t ft_strlen(const char *str)
-{
-    size_t len = 0;
-    while (str[len])
-        len++;
-    return len;
-}
-
-// Function to duplicate a string
-char *ft_strdup(const char *s)
-{
-    size_t len = ft_strlen(s);
-    char *dup = (char *)malloc(len + 1);
-    if (!dup)
-        return NULL;
-    for (size_t i = 0; i < len; i++)
-        dup[i] = s[i];
-    dup[len] = '\0';
-    return dup;
-}
-
-// Function to join two strings
-char *ft_strjoin(char *s1, const char *s2)
-{
-    size_t len1 = ft_strlen(s1);
-    size_t len2 = ft_strlen(s2);
-    char *joined = (char *)malloc(len1 + len2 + 1);
-    if (!joined)
-        return NULL;
-    for (size_t i = 0; i < len1; i++)
-        joined[i] = s1[i];
-    for (size_t i = 0; i < len2; i++)
-        joined[len1 + i] = s2[i];
-    joined[len1 + len2] = '\0';
-    return joined;
-}
-
 // Function to extract a line from the saved data
 char *extract_line(char **saved_data)
 {
@@ -90,7 +52,7 @@ char *get_next_line(int fd)
         return NULL;
 
     // Read more data into saved_data if necessary
-    while (!saved_data || !strchr(saved_data, '\n'))
+    while (!saved_data || !ft_strchr(saved_data, '\n'))
     {
         ssize_t bytes_read = read(fd, buff, BUFFER_SIZE);
         if (bytes_read <= 0) // No more data to read
