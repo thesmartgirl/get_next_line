@@ -70,7 +70,7 @@ static	char *update_saved(const char *saved, const size_t line_len)
 
 char	*get_next_line(int fd)
 {
-    static char *saved;
+    static char *saved = NULL;
 		char *line;
 		char *buff;
 		char *temp;
