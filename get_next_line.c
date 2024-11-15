@@ -18,7 +18,8 @@
 static int	read_line(int fd, char **draft, char *buff)
 {
 	int		bytes_read;
-
+	char 	*tmp;
+	
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
@@ -32,7 +33,11 @@ static int	read_line(int fd, char **draft, char *buff)
 		if (!*draft) // first try not used before, == NULL
 			*draft = ft_strdup(buff);
 		else
+		{
+			tmp = draft;
 			*draft = ft_strjoin(*draft, buff);
+			free(tmp);
+		}
 		printf("read_line draft = %s\n", *draft);
 		if (ft_strchr(*draft, '\n'))
 			break ;
@@ -71,7 +76,6 @@ char	*get_next_line(int fd)
 	if (!read_line(fd, &draft, buff))
 	{
 		free(buff);
-		free(draft);
 		return (NULL); // No more data to read
 	}
 	line = extract_line(draft);
