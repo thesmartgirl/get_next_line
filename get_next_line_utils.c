@@ -68,7 +68,7 @@ char	*ft_strdup(const char *str)
 	return (new_str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char	*res;
 	size_t	i;
@@ -94,6 +94,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	res[i] = '\0';
+	free(s1);
 	return (res);
 }
 
