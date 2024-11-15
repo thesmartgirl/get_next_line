@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// Function to extract a line from the saved data
 char *extract_line(char **saved_data)
 {
     size_t i = 0;
@@ -26,7 +25,7 @@ void update_saved_data(char **saved_data)
         i++;
     if ((*saved_data)[i] == '\0')
     {
-        free(*saved_data);
+        free(*saved_data); // Free only if saved_data is not NULL
         *saved_data = NULL;
     }
     else
@@ -53,7 +52,7 @@ char *get_next_line(int fd)
         return NULL;
 
     // Read more data into saved_data if necessary
-    while (!saved_data || !ft_strchr(saved_data, '\n'))
+    while (!saved_data || !strchr(saved_data, '\n'))
     {
         ssize_t bytes_read = read(fd, buff, BUFFER_SIZE);
         if (bytes_read <= 0) // No more data to read
