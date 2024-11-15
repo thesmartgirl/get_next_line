@@ -15,10 +15,7 @@ static int read_line(int fd, char *buff, char **saved)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0)
-		{
-			// free(buff);
 			break;
-		}
 		if (bytes_read < 0)
 		{
 			free(buff);
@@ -26,7 +23,6 @@ static int read_line(int fd, char *buff, char **saved)
 		}
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
-		// free(buff);
 	}
 	free(buff);
 	return 0;
