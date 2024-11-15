@@ -55,12 +55,13 @@ static char *extract_line(char *draft)
 
 char *get_next_line(int fd)
 {
-    static char *draft;
+    static char *draft = NULL; // Ensure static draft is initialized as NULL
     char *line;
     char *tmp;
     char *buff;
     size_t len_remaining;
 
+    // Validate input
     if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
         return (NULL);
 
@@ -68,6 +69,7 @@ char *get_next_line(int fd)
     if (!buff)
         return NULL;
 
+    // Read line from the file
     draft = read_line(fd, &draft, buff);
     if (!draft)
     {
@@ -75,13 +77,19 @@ char *get_next_line(int fd)
         return (NULL); // No more data to read
     }
 
+    // Extract a line from the draft buffer
     line = extract_line(draft);
 
     tmp = draft;
     len_remaining = ft_strlen(draft) - ft_strlen(line);
+
+    // Allocate new memory for draft, preserving remaining content
     draft = ft_substr(tmp, ft_strlen(line), len_remaining);
 
+    // Free the old draft buffer
     free(tmp);
+
+    // Free the temporary buffer
     free(buff);
 
     return (line);
