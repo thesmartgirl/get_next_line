@@ -96,11 +96,11 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 				}
 			}
-		if (saved)
-		{
-			printf("freeing saved from gnl\n" );
-			free(saved);
-		}
+		// if (saved)
+		// {
+		// 	printf("freeing saved from gnl\n" );
+		// 	free(saved);
+		// }
 
 		free(temp);
 		free(buff);
