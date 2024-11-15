@@ -17,7 +17,7 @@ static int read_line(int fd, char *buff, char **saved)
 		buff[bytes_read] = '\0';
 		temp = *saved;
 		// printf("b4 strjoin saved = %s, buff = %s", *saved, buff );
-		*saved = ft_strjoin(*saved, buff);
+		*saved = ft_strjoin(*temp, buff);
 		// printf("saved from read_line: %s", *saved);
 		free(temp);
 		if (bytes_read == 0) { //empty file or EOF
