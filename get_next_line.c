@@ -57,9 +57,11 @@ static	char *update_saved(const char *saved, const size_t line_len)
 	char *updated;
 	size_t updated_len;
 	printf("updating saved ...\n" );
-
+	printf("line_len = %ld\n", line_len );
+	printf("save_len = %ld\n", ft_strlen(saved) );
 	updated_len =  ft_strlen(saved) - line_len;
 	printf("updated_len = %ld\n", updated_len );
+
 	if (updated_len <= 0)
 		return NULL;
 	updated = ft_substr(saved, line_len, updated_len);
