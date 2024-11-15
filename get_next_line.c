@@ -66,10 +66,10 @@ char *get_next_line(int fd)
         buff[bytes_read] = '\0'; // Null-terminate the buffer
         char *temp = saved_data;
         saved_data = ft_strjoin(saved_data, buff); // Append new data to saved_data
-        free(temp);
+        // free(temp);
         if (!saved_data)
         {
-            // free(buff);
+            free(buff);
             return NULL; // Memory allocation failure
         }
     }
