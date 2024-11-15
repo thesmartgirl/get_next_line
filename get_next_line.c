@@ -9,24 +9,25 @@ static int read_line(int fd, char *buff, char **saved)
 	char *temp;
 
 
-	bytes_read = read(fd, buff, BUFFER_SIZE);;
+	bytes_read = 1;
 	while (bytes_read > 0)
 	{
 		printf("Hello read_line\n");
+		bytes_read = read(fd, buff, BUFFER_SIZE);
 		temp = *saved;
 		*saved = ft_strjoin(*saved, buff);
 		printf("saved from read_line: %s", *saved);
 		free(temp);
-		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read == 0) { //empty file or EOF
+			printf("bytes_read == 0\n" );
+			return 1;
+		}
+		if (bytes_read < 0) { //error reading
+			printf("bytes_read < 0\n" );
+			return 1;
+		}
 	}
-	if (bytes_read == 0) { //empty file or EOF
-		printf("bytes_read == 0\n" );
-		return 1;
-	}
-	if (bytes_read < 0) { //error reading
-		printf("bytes_read < 0\n" );
-		return 1;
-	}
+
 	printf("bye from read_line\n" );
 	return 0;
 }
