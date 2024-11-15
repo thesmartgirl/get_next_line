@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-static int read_line(int fd, char *buff, char *saved)
+static int read_line(int fd, char *buff, char **saved)
 {
 	int bytes_read;
 	char *temp;
@@ -11,8 +11,8 @@ static int read_line(int fd, char *buff, char *saved)
 	bytes_read = read(fd, buff, BUFFER_SIZE);;
 	while (bytes_read > 0)
 	{
-		temp = saved;
-		saved = ft_strjoin(saved, buff);
+		temp = *saved;
+		*saved = ft_strjoin(*saved, buff);
 		free(temp);
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 	}
@@ -30,11 +30,11 @@ static	char *extract_line(const char *saved)
 	char *line;
 	int nl;
 
-	nl = 0;
+	nl = -1;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
 
-	if (nl > 0)
+	if (nl >= 0)
 		line = ft_substr(saved, 0, nl+1);
 	else
 		line = ft_strdup(saved);
@@ -71,7 +71,7 @@ char	*get_next_line(int fd)
 		        saved = ft_strdup("");
 
 		if (!saved || !ft_strchr(saved, '\n'))
-    	if (!read_line(fd, buff, saved))
+    	if (!read_line(fd, buff, &saved))
         line = extract_line(saved);
 
 		saved = update_saved(saved, ft_strlen(line));
