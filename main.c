@@ -29,7 +29,7 @@ int	main(void)
 	int		fd1;
 	char	*line;
 
-	fd1 = open("123.txt", O_RDONLY);
+	fd1 = open("big_line_no_nl", O_RDONLY);
 	line = get_next_line(fd1);
 	printf("get_next_line: |%s", line);
 	free(line);
@@ -55,7 +55,7 @@ int	main(void)
 		return (1);
 	}
 
-	fd3 = open("file3.txt", O_RDWR); 
+	fd3 = open("file3.txt", O_RDWR);
 		// Or any other file where you want to write
 	if (fd3 == -1) {
 		perror("Error opening file3.txt for writing");
