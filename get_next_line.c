@@ -27,7 +27,7 @@ static char	*read_line(int fd, char **draft, char *buff)
 		if (bytes_read <= 0)
 		{
 			// if(draft)
-			// 	free(draft);
+			free(draft);
 			return (NULL);
 		}
 		buff[bytes_read] = '\0';
