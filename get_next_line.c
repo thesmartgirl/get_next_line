@@ -71,6 +71,7 @@ char	*get_next_line(int fd)
 	if (!read_line(fd, &draft, buff))
 	{
 		free(buff);
+		free(draft);
 		return (NULL); // No more data to read
 	}
 	line = extract_line(draft);
