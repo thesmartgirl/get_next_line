@@ -12,7 +12,7 @@ static int read_line(int fd, char **buff, char **saved)
 	while (bytes_read > 0)
 	{
 		temp = *saved;
-		*saved = ft_strjoin(*saved, buff);
+		*saved = ft_strjoin(*saved, *buff);
 		free(temp);
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 	}
