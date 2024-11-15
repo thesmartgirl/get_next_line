@@ -17,7 +17,7 @@ static int read_line(int fd, char *buff, char **saved)
 		}
 		if (bytes_read < 0) { //error reading
 			printf("bytes_read < 0\n" );
-			free(*saved);
+			free(saved);
 			return 1;
 		}
 		buff[bytes_read] = '\0';
