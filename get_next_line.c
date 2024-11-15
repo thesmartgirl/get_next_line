@@ -66,7 +66,7 @@ static	char *update_saved(const char *saved, const size_t line_len)
 
 char	*get_next_line(int fd)
 {
-    static char *saved = NULL;
+    static char *saved;
 		char *line;
 		char *buff;
 		char *temp;
@@ -77,8 +77,6 @@ char	*get_next_line(int fd)
 
 		line = NULL;
 		temp = saved;
-		if (!saved)
-		        saved = ft_strdup("");
 
 		if (!saved || !ft_strchr(saved, '\n'))
     	if (!read_line(fd, buff, &saved))
