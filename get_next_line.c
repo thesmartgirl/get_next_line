@@ -9,7 +9,7 @@ static int read_line(int fd, char *buff, char **saved)
 	// char *temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (bytes_read > 0 && !ft_strchr(saved, '\n'))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0) { //empty file or EOF
@@ -79,8 +79,8 @@ char	*get_next_line(int fd)
 		if (!saved)
 			saved = ft_strdup("");
 		if (!read_line(fd, buff, &saved))
-    	if (!ft_strchr(saved, '\n'))
-			{
+    	// if (ft_strchr(saved, '\n'))
+			// {
 				if (ft_strlen(saved) > 0)
 				{
 					printf("hello\n" );
@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
-			}
+			// }
 		free(buff);
     return line;
 }
