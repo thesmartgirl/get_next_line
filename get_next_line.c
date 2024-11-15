@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-static int read_line(int fd, char *buff, char **saved)
+static int read_line(int fd, char **buff, char **saved)
 {
 	int bytes_read;
 	char *temp;
