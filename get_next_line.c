@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static void	read_line(int fd, char **draft, char *buff)
+static int	read_line(int fd, char **draft, char *buff)
 {
     int		bytes_read;
     char	*tmp;
@@ -13,7 +13,7 @@ static void	read_line(int fd, char **draft, char *buff)
     {
         bytes_read = read(fd, buff, BUFFER_SIZE);
         if (bytes_read <= 0)
-            return; // No more data, or error
+            return 1; // No more data, or error
         buff[bytes_read] = '\0';
         tmp = *draft;
         if (!*draft)
@@ -24,6 +24,7 @@ static void	read_line(int fd, char **draft, char *buff)
         if (ft_strchr(*draft, '\n'))
             break;
     }
+		return 0;
 }
 
 static char	*extract_line(char *draft)
@@ -53,18 +54,21 @@ char	*get_next_line(int fd)
     if (!buff)
         return (NULL); // Memory allocation failure
 
-    read_line(fd, &drafts[fd], buff);
-    if (!drafts[fd] || drafts[fd][0] == '\0')
-    {
-        free(buff);
-        return (NULL); // No data or empty file
-    }
-
-    line = extract_line(drafts[fd]);
-    tmp = drafts[fd];
-    size_t remaining_len = ft_strlen(drafts[fd]) - ft_strlen(line);
-    drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), remaining_len);
-    free(tmp);
-    free(buff);
+    if(!read_line(fd, &drafts[fd], buff))
+			return NULL;
+		else
+		{
+	    if (!drafts[fd] || drafts[fd][0] == '\0')
+	    {
+	        free(buff);
+	        return (NULL); // No data or empty file
+	    }
+	    line = extract_line(drafts[fd]);
+	    tmp = drafts[fd];
+	    size_t remaining_len = ft_strlen(drafts[fd]) - ft_strlen(line);
+	    drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), remaining_len);
+	    free(tmp);
+		}
+	  free(buff);
     return (line);
 }
