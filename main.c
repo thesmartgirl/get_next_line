@@ -33,9 +33,9 @@ int	main(void)
 	line = get_next_line(fd1);
 	printf("get_next_line: |%s", line);
 	free(line);
-	line = get_next_line(fd1);
-	printf("get_next_line: |%s", line);
-	free(line);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
 	// line = get_next_line(fd1);
 	// printf("get_next_line: |%s", line);
 	// free(line);
