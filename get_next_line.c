@@ -42,7 +42,7 @@ static int	read_line(int fd, char **draft, char *buff)
 			*draft = ft_strjoin(*draft, buff);
 			free(tmp);
 		}
-		printf("read_line draft = %s\n", *draft);
+		// printf("read_line draft = %s\n", *draft);
 		if (ft_strchr(*draft, '\n'))
 			break ;
 	}
@@ -56,7 +56,7 @@ static char	*extract_line(char *draft)
   i = 0;
   while (draft[i] != '\0')
   {
-		printf("draft[i] = %c, ", draft[i]);
+		// printf("draft[i] = %c, ", draft[i]);
 		if (draft[i] == '\n')
 			return(ft_substr(draft, 0, i + 1));
 	  i++;
@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 	draft = ft_substr(draft, ft_strlen(line), len_remaining);
 	free(tmp);
 	free(buff);
-	printf("line = %s\n", line);
-	printf("draft = %s\n", draft);
+	// printf("draft = %s\n", draft);
+	// printf("line = %s\n", line);
 	return (line);
 }
