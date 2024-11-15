@@ -19,9 +19,11 @@ static int read_line(int fd, char *buff, char **saved)
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 	}
 	if (bytes_read == 0) { //empty file or EOF
+		printf("bytes_read == 0\n" );
 		return 1;
 	}
 	if (bytes_read < 0) { //error reading
+		printf("bytes_read < 0\n" );
 		return 1;
 	}
 	printf("bye from read_line\n" );
