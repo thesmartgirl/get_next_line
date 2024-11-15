@@ -1,3 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 19:28:19 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/14 20:15:58 by ataan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+
 static char *read_line(int fd, char **draft, char *buff)
 {
     int bytes_read;
