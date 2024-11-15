@@ -3,113 +3,78 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// Function to extract a line from the saved data
-char *extract_line(char **saved_data)
+static int read_line(int fd, char *buff, char **saved)
 {
-    size_t i;
-		char *line;
+	int bytes_read;
+	char *temp;
 
-		i = 0;
-    while ((*saved_data)[i] != '\n' && (*saved_data)[i] != '\0')
-        i++;
-		if (i == 0)
-			line = ft_strdup((*saved_data));
-		else
-		  line = ft_substr((*saved_data), 0, i+1);
-    return line;
+	bytes_read = read(fd, buff, BUFFER_SIZE);;
+	while (bytes_read > 0)
+	{
+		temp = saved;
+		*saved = ft_strjoin(*saved, buff);
+		free(temp);
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+	}
+	if (bytes_read == 0) { //empty file or EOF
+		return 1;
+	}
+	if (bytes_read < 0) { //error reading
+		return 1;
+	}
+	return 0;
 }
 
-// Function to update the static data (saved_data) after extracting a line
-void update_saved_data(char **saved_data)
+static	char *extract_line(const char *saved)
 {
-    size_t i;
-		size_t j;
+	char *line;
+	int nl;
 
-		i = 0;
-    while ((*saved_data)[i] != '\n' && (*saved_data)[i] != '\0')
-        i++;
-    if ((*saved_data)[i] == '\0')
-    {
-        free(*saved_data); // Free only if saved_data is not NULL
-        *saved_data = NULL;
-    }
-    else
-    {
-				j = 0;
-        char *new_data = (char *)malloc(ft_strlen(*saved_data) - i);
-        if (!new_data)
-            return; // Should handle this case more gracefully
-        i++; // Skip the newline character
-        while ((*saved_data)[i])
-            new_data[j++] = (*saved_data)[i++];
-        new_data[j] = '\0';
-        free(*saved_data);
-        *saved_data = new_data;
-    }
+	nl = 0;
+	while (saved[nl] != '\0' && saved[nl] != '\n')
+		nl++;
+
+	if (nl > 0)
+		line = ft_substr(saved, 0, nl+1);
+	else
+		line = ft_strdup(saved);
+
+	return line;
 }
 
-// Main get_next_line function
-char *get_next_line(int fd)
+static	char *update_saved(const char *saved, const size_t line_len)
 {
-    static char *saved_data = NULL;
-		ssize_t bytes_read;
+	char *updated;
+	size_t updated_len;
+
+	updated_len =  ft_strlen(saved) - line_len;
+	if (updated_len <= 0)
+		return NULL;
+	updated = ft_substr(saved, line_len, updated_len);
+	return updated;
+}
+
+char	*get_next_line(int fd)
+{
+    static char *saved;
 		char *line;
 		char *buff;
 		char *temp;
 
 		buff = (char *)malloc(BUFFER_SIZE + 1);
-    if (!buff || fd < 0)
-        return NULL;
+		if(!buff)
+			return NULL;
 
-    // Read more data into saved_data if necessary
-    while (!saved_data || !ft_strchr(saved_data, '\n'))
-    {
-        bytes_read = read(fd, buff, BUFFER_SIZE);
-        if (bytes_read <= 0) // No more data to read
-        {
-						free(buff);
-						return NULL; // No more lines to return
-			  }
-        buff[bytes_read] = '\0'; // Null-terminate the buffer
-        temp = saved_data;
-        saved_data = ft_strjoin(saved_data, buff); // Append new data to saved_data
-        free(temp);
-        if (!saved_data)
-        {
-            free(buff);
-            return NULL; // Memory allocation failure
-        }
-    }
+		line = NULL;
+		temp = saved;
 
-    free(buff);
+		if (!saved || !ft_strchr(saved, '\n'))
+    	if (!read_line(fd, buff, &saved))
+        line = extract_line(saved);
 
-    // Extract the line from saved_data
-    line = extract_line(&saved_data);
-    if (!line)
-        return NULL;
+		saved = update_saved(saved, ft_strlen(line));
 
-    // Update saved_data to remove the extracted line
-    update_saved_data(&saved_data);
-
+		free(temp);
+		free(buff);
     return line;
 }
-/*
-int main()
-{
-    int fd = open("sample.txt", O_RDONLY);  // Replace with an actual file
-    if (fd < 0)
-    {
-        perror("Failed to open file");
-        return 1;
-    }
-
-    char *line;
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line);  // Print the line (doesn't need to include newline)
-        free(line);  // Don't forget to free each line after use
-    }
-
-    close(fd);
-    return 0;
-}*/
