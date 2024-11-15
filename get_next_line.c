@@ -24,6 +24,7 @@ static int read_line(int fd, char *buff, char **saved)
 		// temp = *saved;
 		*saved = ft_strjoin(*saved, buff);
 		// free(temp);
+		printf("saved after read_line = %s", *saved );
 	}
 	return 0;
 }
