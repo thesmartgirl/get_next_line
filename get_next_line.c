@@ -10,14 +10,24 @@ static int read_line(int fd, char *buff, char **saved)
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
+		buff = (char *)malloc(BUFFER_SIZE + 1);
+		if(!buff)
+			return 1;
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0)
+		{
+			free(buff);
 			break;
+		}
 		if (bytes_read < 0)
+		{
+			free(buff);
 			return 1;
+		}
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
 	}
+	free(buff);
 	return 0;
 }
 
@@ -55,9 +65,7 @@ char	*get_next_line(int fd)
 		char *buff;
 		char *temp;
 
-		buff = (char *)malloc(BUFFER_SIZE + 1);
-		if(!buff)
-			return NULL;
+		buff = NULL;
 		line = NULL;
 		if (!saved)
 			saved = ft_strdup("");
