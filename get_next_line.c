@@ -39,7 +39,7 @@ static	char *extract_line(const char *saved)
 	char *line;
 	int nl;
 
-	printf("extracting line ..." );
+	printf("extracting line ...\n" );
 	nl = 0;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
@@ -56,9 +56,10 @@ static	char *update_saved(const char *saved, const size_t line_len)
 {
 	char *updated;
 	size_t updated_len;
-	printf("updating saved ..." );
+	printf("updating saved ...\n" );
 
 	updated_len =  ft_strlen(saved) - line_len;
+	printf("updated_len = %d\n", updated_len );
 	if (updated_len <= 0)
 		return NULL;
 	updated = ft_substr(saved, line_len, updated_len);
