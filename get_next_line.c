@@ -15,12 +15,12 @@
 #include <unistd.h>
 #include <stdio.h>
 
-static void	read_line(int fd, char **drafts)
+static void	read_line(int fd, char **draft)
 {
 	char	*buff;
 	int		bytes_read;
 	char	*tmp;
-	
+
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return ;
@@ -31,13 +31,13 @@ static void	read_line(int fd, char **drafts)
 		if (bytes_read <= 0)
 			return (free(buff));
 		buff[bytes_read] = '\0';
-		tmp = drafts[fd];
-		if (!drafts[fd]) // first try not used before, == NULL
-			drafts[fd] = ft_strdup(buff);
+		tmp = draft;
+		if (!draft) // first try not used before, == NULL
+			draft = ft_strdup(buff);
 		else
-			drafts[fd] = ft_strjoin(drafts[fd], buff);
+			draft = ft_strjoin(draft, buff);
 		free(tmp);
-		if (ft_strchr(drafts[fd], '\n'))
+		if (ft_strchr(draft, '\n'))
 			break ;
 	}
 	free(buff);
@@ -45,7 +45,7 @@ static void	read_line(int fd, char **drafts)
 static char	*extract_line(char *draft)
 {
   int i;
-  
+
   i = 0;
   if (ft_strchr(draft, '\n'))
   {
@@ -87,10 +87,10 @@ char	*get_next_line(int fd)
 	static char	*drafts[FOPEN_MAX];
 	char *line;
 	char *tmp;
-  
+
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FOPEN_MAX)
 		return (NULL);
-	read_line(fd, drafts);
+	read_line(fd, &drafts[fd]);
 	if (!drafts[fd] || drafts[fd][0] == '\0')
 		return (NULL); // No more data to read
 	line = extract_line(drafts[fd]);
