@@ -15,9 +15,6 @@ static int read_line(int fd, char *buff, char **saved)
 		// printf("Hello read_line\n");
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		buff[bytes_read] = '\0';
-		temp = *saved;
-		*saved = ft_strjoin(*saved, buff);
-		free(temp);
 		if (bytes_read == 0) { //empty file or EOF
 			// printf("bytes_read == 0\n" );
 			break;
@@ -26,6 +23,9 @@ static int read_line(int fd, char *buff, char **saved)
 			printf("bytes_read < 0\n" );
 			return 1;
 		}
+		temp = *saved;
+		*saved = ft_strjoin(*saved, buff);
+		free(temp);
 	}
 
 	printf("bye from read_line\n" );
