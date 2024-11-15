@@ -30,18 +30,12 @@ static int	read_line(int fd, char **draft, char *buff)
 			break;
 		}
 		buff[bytes_read] = '\0';
+		tmp = *draft;
 		if (!*draft) // first try not used before, == NULL
-		{
-			tmp = *draft;
 			*draft = ft_strdup(buff);
-			free(tmp);
-		}
 		else
-		{
-			tmp = *draft;
 			*draft = ft_strjoin(*draft, buff);
-			free(tmp);
-		}
+		free(tmp);
 		// printf("read_line draft = %s\n", *draft);
 		if (ft_strchr(*draft, '\n'))
 			break ;
