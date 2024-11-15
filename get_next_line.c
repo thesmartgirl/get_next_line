@@ -67,7 +67,9 @@ char	*get_next_line(int fd)
 
 		line = NULL;
 		temp = saved;
-
+		if (!saved)
+		        saved = ft_strdup("");
+						
 		if (!saved || !ft_strchr(saved, '\n'))
     	if (!read_line(fd, buff, &saved))
         line = extract_line(saved);
