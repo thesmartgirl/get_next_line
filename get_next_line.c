@@ -44,6 +44,7 @@ static char	*extract_line(char *draft)
   int i;
 
   i = 0;
+	printf("draft[i] = %c, ", draft[i]);
   while (draft[i] != '\0')
   {
 		if (draft[i] != '\n')
