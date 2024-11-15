@@ -30,11 +30,11 @@ static	char *extract_line(const char *saved)
 	char *line;
 	int nl;
 
-	nl = -1;
+	nl = 0;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
 
-	if (nl >= 0)
+	if (nl > 0 || saved[0] == '\n')
 		line = ft_substr(saved, 0, nl+1);
 	else
 		line = ft_strdup(saved);
