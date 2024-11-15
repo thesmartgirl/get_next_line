@@ -28,7 +28,7 @@ static int read_line(int fd, char *buff, char **saved)
 	return 0;
 }
 
-static	char *extract_line(const char *saved)
+static	char *extract_line(char *saved)
 {
 	char *line;
 	int nl;
