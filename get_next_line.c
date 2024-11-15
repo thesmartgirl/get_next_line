@@ -8,7 +8,7 @@ static int read_line(int fd, char *buff, char **saved)
 	int bytes_read;
 	char *temp;
 
-	printf("Hello read_line\n");
+	printf("Hello read_line");
 	bytes_read = read(fd, buff, BUFFER_SIZE);;
 	while (bytes_read > 0)
 	{
