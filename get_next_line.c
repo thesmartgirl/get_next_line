@@ -71,7 +71,7 @@ char	*get_next_line(int fd)
 	    size_t remaining_len = ft_strlen(drafts[fd]) - ft_strlen(line);
 	    drafts[fd] = ft_substr(drafts[fd], ft_strlen(line), remaining_len);
 	    free(tmp);
+			free(buff);
 		}
-	  free(buff);
-    return (line);
+	  return (line);
 }
