@@ -23,7 +23,7 @@ static int	read_line(int fd, char **draft, char *buff)
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
-		if (bytes_read < 0)
+		if (bytes_read <= 0)
 			return 0;
 		if (bytes_read == 0) {
 			break;
