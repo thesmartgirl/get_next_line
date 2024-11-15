@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "get_next_line.h"
 
 // Function to extract a line from the saved data
 char *extract_line(char **saved_data)
