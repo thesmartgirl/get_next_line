@@ -63,7 +63,7 @@ char	*get_next_line(int fd)
 {
     static char *saved = NULL;
 		char *line;
-		char *buff;
+		// char *buff;
 		char *temp;
 
 		// buff = NULL;
