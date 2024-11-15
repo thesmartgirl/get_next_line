@@ -51,8 +51,8 @@ char *get_next_line(int fd)
     if (!buff || fd < 0)
         return NULL;
 
+				while (!saved_data || !ft_strchr(saved_data, '\n'))
     // Read more data into saved_data if necessary
-    while (!saved_data || !strchr(saved_data, '\n'))
     {
         ssize_t bytes_read = read(fd, buff, BUFFER_SIZE);
         if (bytes_read <= 0) // No more data to read
