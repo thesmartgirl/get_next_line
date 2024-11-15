@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-static int read_line(int fd, char *buff, char **saved)
+static int read_line(int fd, char *buff, char *saved)
 {
 	int bytes_read;
 	char *temp;
@@ -11,8 +11,8 @@ static int read_line(int fd, char *buff, char **saved)
 	bytes_read = read(fd, buff, BUFFER_SIZE);;
 	while (bytes_read > 0)
 	{
-		temp = *saved;
-		*saved = ft_strjoin(*saved, buff);
+		temp = saved;
+		saved = ft_strjoin(saved, buff);
 		free(temp);
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 	}
