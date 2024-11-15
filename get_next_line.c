@@ -7,16 +7,16 @@ static int read_line(int fd, char *buff, char **saved)
 {
 	int bytes_read;
 
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if(!buff)
+		return 1;
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
-		buff = (char *)malloc(BUFFER_SIZE + 1);
-		if(!buff)
-			return 1;
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0)
 		{
-			free(buff);
+			// free(buff);
 			break;
 		}
 		if (bytes_read < 0)
@@ -26,8 +26,9 @@ static int read_line(int fd, char *buff, char **saved)
 		}
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
-		free(buff);
+		// free(buff);
 	}
+	free(buff);
 	return 0;
 }
 
