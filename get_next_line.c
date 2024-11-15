@@ -6,22 +6,25 @@
 // Function to extract a line from the saved data
 char *extract_line(char **saved_data)
 {
-    size_t i = 0;
+    size_t i;
+
+		i = 0;
     while ((*saved_data)[i] != '\n' && (*saved_data)[i] != '\0')
         i++;
-    char *line = (char *)malloc(i + 2); // +1 for newline and +1 for null terminator
-    if (!line)
-        return NULL;
-    for (size_t j = 0; j < i + 1; j++) // Include newline if present
-        line[j] = (*saved_data)[j];
-    line[i + 1] = '\0';
+		if (i == 0)
+			line = ft_strdup((*saved_data));
+		else
+		  line = ft_substr((*saved_data), 0, i+1);
     return line;
 }
 
 // Function to update the static data (saved_data) after extracting a line
 void update_saved_data(char **saved_data)
 {
-    size_t i = 0;
+    size_t i;
+		size_t j;
+
+		i = 0;
     while ((*saved_data)[i] != '\n' && (*saved_data)[i] != '\0')
         i++;
     if ((*saved_data)[i] == '\0')
@@ -31,7 +34,7 @@ void update_saved_data(char **saved_data)
     }
     else
     {
-        size_t j = 0;
+				j = 0;
         char *new_data = (char *)malloc(ft_strlen(*saved_data) - i);
         if (!new_data)
             return; // Should handle this case more gracefully
@@ -48,23 +51,31 @@ void update_saved_data(char **saved_data)
 char *get_next_line(int fd)
 {
     static char *saved_data = NULL;
-    char *buff = (char *)malloc(BUFFER_SIZE + 1);
+		ssize_t bytes_read;
+		char *line;
+		char *buff;
+		char *temp;
+
+		buff = (char *)malloc(BUFFER_SIZE + 1);
     if (!buff || fd < 0)
         return NULL;
 
     // Read more data into saved_data if necessary
     while (!saved_data || !ft_strchr(saved_data, '\n'))
     {
-        ssize_t bytes_read = read(fd, buff, BUFFER_SIZE);
+        bytes_read = read(fd, buff, BUFFER_SIZE);
         if (bytes_read <= 0) // No more data to read
         {
             // free(buff);
             if (!saved_data)
-                return NULL; // No more lines to return
+						{
+							free(buff);
+							return NULL; // No more lines to return
+						}
             break; // EOF reached or read error, we still have data to process
         }
         buff[bytes_read] = '\0'; // Null-terminate the buffer
-        char *temp = saved_data;
+        temp = saved_data;
         saved_data = ft_strjoin(saved_data, buff); // Append new data to saved_data
         free(temp);
         if (!saved_data)
