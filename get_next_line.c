@@ -18,7 +18,6 @@
 static int	read_line(int fd, char **draft, char *buff)
 {
 	int		bytes_read;
-	char	*tmp;
 
 	bytes_read = 1;
 	while (bytes_read > 0)
