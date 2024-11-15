@@ -17,7 +17,7 @@ static int read_line(int fd, char *buff, char **saved)
 		buff[bytes_read] = '\0';
 		temp = *saved;
 		// printf("b4 strjoin saved = %s, buff = %s", *saved, buff );
-		*saved = ft_strjoin(*temp, buff);
+		*saved = ft_strjoin(*saved, buff);
 		// printf("saved from read_line: %s", *saved);
 		free(temp);
 		if (bytes_read == 0) { //empty file or EOF
@@ -39,7 +39,7 @@ static	char *extract_line(const char *saved)
 	char *line;
 	int nl;
 
-	// printf("saved = %s", saved );
+	printf("extracting line ..." );
 	nl = 0;
 	while (saved[nl] != '\0' && saved[nl] != '\n')
 		nl++;
@@ -56,6 +56,7 @@ static	char *update_saved(const char *saved, const size_t line_len)
 {
 	char *updated;
 	size_t updated_len;
+	printf("updating saved ..." );
 
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
