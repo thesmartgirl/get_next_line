@@ -29,6 +29,17 @@ static int read_line(int fd, char **saved)
 	return 0;
 }
 
+static	void update_saved(char **saved, const size_t line_len)
+{
+	char *temp;
+	size_t updated_len;
+
+	updated_len =  ft_strlen(*saved) - line_len;
+	temp = *saved;
+	*saved = ft_substr(*saved, line_len, updated_len);
+	free(temp);
+}
+
 static	char *extract_line(char **saved)
 {
 	char *line;
@@ -43,17 +54,6 @@ static	char *extract_line(char **saved)
 		line = ft_strdup(saved);
 	update_saved(*saved, ft_strlen(line));
 	return line;
-}
-
-static	void update_saved(char **saved, const size_t line_len)
-{
-	char *temp;
-	size_t updated_len;
-
-	updated_len =  ft_strlen(*saved) - line_len;
-	temp = *saved;
-	*saved = ft_substr(*saved, line_len, updated_len);
-	free(temp);
 }
 
 char	*get_next_line(int fd)
