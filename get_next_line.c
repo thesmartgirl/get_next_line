@@ -8,8 +8,6 @@ static int read_line(int fd, char **saved)
 	int bytes_read;
 	char *buff;
 
-	// if(*saved)
-	// 	printf("*saved is true\n");
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if(!buff)
 		return 1;
@@ -27,7 +25,6 @@ static int read_line(int fd, char **saved)
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
 	}
-	// printf("freeing buff in read_line\n");
 	free(buff);
 	return 0;
 }
@@ -79,38 +76,33 @@ char	*get_next_line(int fd)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
 		{
-				// printf("I'm here1\n");
 				if (saved[0] == '\0')
 				{
-					//handle EOF
 					free(saved);
 					saved = NULL;
 				}
 				else
 				{
 						line = extract_line(saved);
-
 						line_len = ft_strlen(line);
 						updated_len =  ft_strlen(saved) - line_len;
-						if (updated_len > 0)  // If there is remaining data in saved.
+						if (updated_len > 0)
             {
 								temp = saved;
-                saved = ft_substr(saved, line_len, updated_len);  // Update saved with remaining data.
+                saved = ft_substr(saved, line_len, updated_len);
 								free(temp);
             }
             else
             {
-							// printf("I'm here2\n");
-                free(saved);
-                saved = NULL;
+							  free(saved);
+                // saved = NULL;
             }
 				}
 		}
 		else
     {
-        free(saved);  // In case of read error, free saved.
-        saved = NULL;  // Set saved to NULL to avoid dangling pointer.
+        free(saved);
+				// saved = NULL;
     }
-
 		return line;
 }
