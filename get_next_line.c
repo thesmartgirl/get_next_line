@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 		if (saved)
 		{
 			printf("freeing saved at end of gnl\n");
-			free(saved);
+			// free(saved);
 		}
     return line;
 }
