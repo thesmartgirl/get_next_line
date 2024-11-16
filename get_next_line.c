@@ -8,8 +8,8 @@ static int read_line(int fd, char **saved)
 	int bytes_read;
 	char *buff;
 
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	if(!buff)
+	// buff = (char *)malloc(BUFFER_SIZE + 1);
+	// if(!buff)
 		return 1;
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
@@ -28,17 +28,6 @@ static int read_line(int fd, char **saved)
 	free(buff);
 	return 0;
 }
-
-// static	void update_saved(char **saved, const size_t line_len)
-// {
-// 	char *temp;
-// 	size_t updated_len;
-//
-// 	updated_len =  ft_strlen(*saved) - line_len;
-// 	temp = *saved;
-// 	*saved = ft_substr(*saved, line_len, updated_len);
-// 	free(temp);
-// }
 
 static	char *extract_line(char **saved)
 {
