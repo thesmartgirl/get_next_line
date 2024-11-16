@@ -47,7 +47,7 @@ static	char *extract_line(char *saved)
 	return line;
 }
 
-static	char *update_saved(const char *saved, const size_t line_len)
+static	char *update_saved(char *saved, const size_t line_len)
 {
 	char *updated;
 	size_t updated_len;
@@ -56,6 +56,7 @@ static	char *update_saved(const char *saved, const size_t line_len)
 	if (updated_len <= 0)
 		updated = NULL;
 	updated = ft_substr(saved, line_len, updated_len);
+	free(saved);
 	return updated;
 }
 
