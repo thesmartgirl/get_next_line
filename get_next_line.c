@@ -97,18 +97,16 @@ char	*get_next_line(int fd)
                 free(saved);
                 saved = NULL;
             }
-						// printf("I'm here3\n");
+				}
+				if (line == NULL) {
+					free(saved);
+				}
+		}
+		else
+    {
+        free(saved);  // In case of read error, free saved.
+        saved = NULL;  // Set saved to NULL to avoid dangling pointer.
+    }
 
-						// free(temp);
-					}
-		}
-		// else
-    // {
-    //     free(saved);  // In case of read error, free saved.
-    //     saved = NULL;  // Set saved to NULL to avoid dangling pointer.
-    // }
-		if (line == NULL) {
-			free(saved);
-		}
 		return line;
 }
