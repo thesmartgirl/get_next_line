@@ -107,5 +107,8 @@ char	*get_next_line(int fd)
         free(saved);  // In case of read error, free saved.
         saved = NULL;  // Set saved to NULL to avoid dangling pointer.
     }
+		if (line == NULL) {
+			free(saved);
+		}
 		 return line;
 }
