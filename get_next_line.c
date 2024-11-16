@@ -79,7 +79,8 @@ char	*get_next_line(int fd)
 					line = extract_line(saved);
 					saved = update_saved(saved, ft_strlen(line));
 				}
-				free(saved);
+				else
+					free(saved);
 		}
 		printf("saved at the end of gnl = %s", saved);
     return line;
