@@ -42,9 +42,8 @@ int	main(void)
 	free(line);
 	line = get_next_line(fd1);
 	printf("get_next_line: |%s", line);
-	if (line) {
 			free(line);
-		}
+
 	close(fd1);
 	return (0);
 }
