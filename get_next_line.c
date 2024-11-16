@@ -46,12 +46,12 @@ static	char *extract_line(char **saved)
 	int nl;
 
 	nl = 0;
-	while (saved[nl] != '\n' && saved[nl] != '\0')
+	while (*saved[nl] != '\n' && *saved[nl] != '\0')
 		nl++;
-	if (nl > 0 || saved[0] == '\n')
-		line = ft_substr(saved, 0, nl+1);
+	if (nl > 0 || *saved[0] == '\n')
+		line = ft_substr(*saved, 0, nl+1);
 	else
-		line = ft_strdup(saved);
+		line = ft_strdup(*saved);
 	update_saved(*saved, ft_strlen(line));
 	return line;
 }
