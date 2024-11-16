@@ -52,7 +52,7 @@ static	char *extract_line(char **saved)
 		line = ft_substr(*saved, 0, nl+1);
 	else
 		line = ft_strdup(*saved);
-	update_saved(*saved, ft_strlen(line));
+	update_saved(saved, ft_strlen(line));
 	return line;
 }
 
