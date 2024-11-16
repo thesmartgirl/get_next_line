@@ -47,7 +47,6 @@ static	char *extract_line(char **saved)
 
 static	void update_saved(char **saved, const size_t line_len)
 {
-	char *updated;
 	char *temp;
 	size_t updated_len;
 
@@ -55,15 +54,12 @@ static	void update_saved(char **saved, const size_t line_len)
 	temp = *saved;
 	*saved = ft_substr(*saved, line_len, updated_len);
 	free(temp);
-	return updated;
 }
 
 char	*get_next_line(int fd)
 {
     static char *saved;
 		char *line;
-		char *temp;
-		size_t updated_len;
 
 		line = NULL;
 		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
