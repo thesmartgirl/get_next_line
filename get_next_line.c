@@ -8,6 +8,8 @@ static int read_line(int fd, char **saved)
 	int bytes_read;
 	char *buff;
 
+	if(*saved)
+		printf("*saved is true\n");
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if(!buff)
 		return 1;
@@ -25,6 +27,7 @@ static int read_line(int fd, char **saved)
 		buff[bytes_read] = '\0';
 		*saved = gnl_strjoin(*saved, buff);
 	}
+	printf("freeing buff in read_line\n");
 	free(buff);
 	return 0;
 }
@@ -74,10 +77,14 @@ char	*get_next_line(int fd)
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
+					printf("freeing temp in gnl\n");
 					free(temp);
 				}
 		}
 		if (saved[0] == '\0')
+		{
+			printf("freeing saved at end of gnl\n");
 			free(saved);
+		}
     return line;
 }
