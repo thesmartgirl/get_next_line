@@ -83,11 +83,12 @@ char	*get_next_line(int fd)
 				if (saved[0] != '\0')
 				{
 						line = extract_line(saved);
-						temp = saved;
+
 						line_len = ft_strlen(line);
 						updated_len =  ft_strlen(saved) - line_len;
 						if (updated_len > 0)  // If there is remaining data in saved.
             {
+								temp = saved;
                 saved = ft_substr(saved, line_len, updated_len);  // Update saved with remaining data.
 								free(temp);
             }
