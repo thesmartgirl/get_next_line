@@ -45,7 +45,7 @@ static	char *extract_line(char **saved)
 	char *line;
 	int nl;
 	char *temp;
-	size_t updated_len;
+	size_t line_len;
 
 	nl = 0;
 	while ((*saved)[nl] != '\n' && (*saved)[nl] != '\0')
@@ -54,10 +54,9 @@ static	char *extract_line(char **saved)
 		line = ft_substr(*saved, 0, nl+1);
 	else
 		line = ft_strdup(*saved);
-	// update_saved(saved, ft_strlen(line));
-	updated_len =  ft_strlen(*saved) - ft_strlen(line);
+	line_len =  ft_strlen(line);
 	temp = *saved;
-	*saved = ft_substr(*saved, ft_strlen(line), updated_len);
+	*saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
 	free(temp);
 	return line;
 }
