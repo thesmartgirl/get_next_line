@@ -46,7 +46,8 @@ static	char *extract_line(char *saved)
 	else
 	{
 		line = ft_strdup(saved);
-		free(saved);
+		if (saved)
+        free(saved);
 		saved = ft_strdup("");
 	}
 	return line;
