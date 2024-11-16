@@ -26,7 +26,7 @@
 
 int	main(void)
 {
-	int		fd1;
+	// int		fd1;
 	char	*line;
 
 
