@@ -73,26 +73,23 @@ char	*get_next_line(int fd)
 			return (NULL);
 		if (!saved)
 			saved = ft_strdup("");
-		if (!read_line(fd, &saved) && saved[0] != '\0')
+		if (!read_line(fd, &saved))
 		{
-				// if (saved[0] == '\0')
-				// {
-				// 	free(saved);
-				// 	saved = NULL;
-				// }
-				// else
+				if (saved[0] == '\0')
+				{
+					free(saved);
+					saved = NULL;
+				}
+				else
 				{
 						line = extract_line(saved);
 						updated_len =  ft_strlen(saved) - ft_strlen(line);
-            {
-								temp = saved;
-                saved = ft_substr(saved, ft_strlen(line), updated_len);
-								free(temp);
-            }
+						temp = saved;
+            saved = ft_substr(saved, ft_strlen(line), updated_len);
+						free(temp);
 				}
 		}
-		// else
-		if (saved[0] == '\0')
+		else
     {
         free(saved);
 				saved = NULL;
