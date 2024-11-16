@@ -77,14 +77,15 @@ char	*get_next_line(int fd)
 					line = extract_line(saved);
 					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
-					if(saved)
-						printf("end of gnl saved is true\n");
+
 					if(temp)
 							printf("end of gnl temp is true\n");
 					printf("freeing temp in gnl\n");
 					free(temp);
 				}
 		}
+		if(saved)
+			printf("end of gnl saved is true\n");
 		if (saved[0] == '\0')
 		{
 			printf("freeing saved at end of gnl\n");
