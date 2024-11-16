@@ -54,7 +54,10 @@ static	char *update_saved(char *saved, const size_t line_len)
 
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
+	{
+		free(saved);
 		updated = NULL;
+	}
 	else
 		updated = ft_substr(saved, line_len, updated_len);
 	// free(saved);
