@@ -95,14 +95,14 @@ char	*get_next_line(int fd)
             else
             {
 							  free(saved);
-                // saved = NULL;
+                saved = NULL;
             }
 				}
 		}
 		else
     {
         free(saved);
-				// saved = NULL;
+				saved = NULL;
     }
 		return line;
 }
