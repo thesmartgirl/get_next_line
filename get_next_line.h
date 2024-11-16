@@ -16,17 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# ifndef FD_MAX
-#  define FD_MAX 1
-# endif
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
-# endif
-
-# if BUFFER_SIZE > 1000000
-#  undef BUFFER_SIZE
-#  define BUFFER_SIZE 1000000
 # endif
 
 # if BUFFER_SIZE < 1
