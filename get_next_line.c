@@ -79,28 +79,30 @@ char	*get_next_line(int fd)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
 		{
-			printf("I'm here1\n");
-
-				if (saved[0] == '\0')
-				{
-					printf("I'm here2\n");
-					printf("saved len = %ld\n", ft_strlen(saved));
-					// if(ft_strlen(saved) == 0)
-					saved = NULL;
-				}
+				printf("I'm here1\n");
 				if (saved[0] != '\0')
 				{
-					line = extract_line(saved);
-					temp = saved;
-					line_len = ft_strlen(line);
-					updated_len =  ft_strlen(saved) - line_len;
-					saved = ft_substr(saved, line_len, updated_len);
-
-					free(temp);
-				}
-
+						line = extract_line(saved);
+						temp = saved;
+						line_len = ft_strlen(line);
+						updated_len =  ft_strlen(saved) - line_len;
+						if (updated_len > 0)  // If there is remaining data in saved.
+            {
+                saved = ft_substr(saved, line_len, updated_len);  // Update saved with remaining data.
+            }
+            else
+            {
+                // No remaining data, so clear saved.
+                free(saved);
+                saved = NULL;
+            }
+						free(temp);
+					}
 		}
 		else
-				free(saved);
+    {
+        free(saved);  // In case of read error, free saved.
+        saved = NULL;  // Set saved to NULL to avoid dangling pointer.
+    }
 		 return line;
 }
