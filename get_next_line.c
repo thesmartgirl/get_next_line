@@ -25,7 +25,8 @@ static int read_line(int fd, char **saved)
 		if (bytes_read < 0)
 		{
 			free(buff);
-			free(*saved);
+			if(*saved)
+				free(*saved);
 			return 1;
 		}
 		buff[bytes_read] = '\0';
