@@ -92,6 +92,7 @@ char	*get_next_line(int fd)
 				}
 		}
 		// else
+		if (saved[0] == '\0')
     {
         free(saved);
 				saved = NULL;
