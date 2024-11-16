@@ -32,7 +32,7 @@ static int read_line(int fd, char **saved)
 	return 0;
 }
 
-static	char *extract_line(char *saved)
+static	char *extract_line(const char *saved)
 {
 	char *line;
 	int nl;
@@ -85,10 +85,7 @@ char	*get_next_line(int fd)
 					temp = saved;
 					line_len = ft_strlen(line);
 					updated_len =  ft_strlen(saved) - line_len;
-					if (updated_len <= 0)
-						free(saved);
-					else
-						saved = ft_substr(saved, line_len, updated_len);
+					saved = ft_substr(saved, line_len, updated_len);
 					free(temp);
 				}
 		}
