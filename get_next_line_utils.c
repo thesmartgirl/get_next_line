@@ -24,20 +24,21 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int ch)
-{
-		int	i;
+char	*ft_strchr(const char *s, int c)
+unsigned int	i;
+	char			cc;
 
-		i = 0;
-		if (str == NULL)
-			return (NULL);
-		while (str[i])
-		{
-			if (str[i] == ch)
-				return (i);
-			i++;
-		}
-		return (NULL);
+	cc = (char)c;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == cc)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == cc)
+		return ((char *)&s[i]);
+	return (NULL);
 }
 
 char	*ft_strdup(const char *str)
