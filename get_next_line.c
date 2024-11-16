@@ -29,7 +29,7 @@ static int read_line(int fd, char **saved)
 	return 0;
 }
 
-static	char *extract_line(const char *saved)
+static	char *extract_line(char **saved)
 {
 	char *line;
 	int nl;
@@ -41,25 +41,22 @@ static	char *extract_line(const char *saved)
 		line = ft_substr(saved, 0, nl+1);
 	else
 		line = ft_strdup(saved);
+	update_saved(*saved, ft_strlen(line));
 	return line;
 }
 
-// static	char *update_saved(char *saved, const size_t line_len)
-// {
-// 	char *updated;
-// 	size_t updated_len;
-//
-// 	updated_len =  ft_strlen(saved) - line_len;
-// 	if (updated_len <= 0)
-// 	{
-// 		// free(saved);
-// 		updated = NULL;
-// 	}
-// 	else
-// 		updated = ft_substr(saved, line_len, updated_len);
-// 	// free(saved);
-// 	return updated;
-// }
+static	void update_saved(char **saved, const size_t line_len)
+{
+	char *updated;
+	char *temp;
+	size_t updated_len;
+
+	updated_len =  ft_strlen(*saved) - line_len;
+	temp = *saved;
+	*saved = ft_substr(*saved, line_len, updated_len);
+	free(temp);
+	return updated;
+}
 
 char	*get_next_line(int fd)
 {
@@ -81,13 +78,7 @@ char	*get_next_line(int fd)
 					saved = NULL;
 				}
 				else
-				{
-						line = extract_line(saved);
-						updated_len =  ft_strlen(saved) - ft_strlen(line);
-						temp = saved;
-            saved = ft_substr(saved, ft_strlen(line), updated_len);
-						free(temp);
-				}
+						line = extract_line(&saved);
 		}
 		else
     {
