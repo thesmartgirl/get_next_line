@@ -68,6 +68,8 @@ char	*get_next_line(int fd)
 		char *line;
 
 		line = NULL;
+		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+			return (NULL);
 		if (!saved)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
