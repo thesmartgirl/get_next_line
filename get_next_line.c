@@ -79,6 +79,8 @@ char	*get_next_line(int fd)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
 		{
+			printf("I'm here1\n");
+
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
