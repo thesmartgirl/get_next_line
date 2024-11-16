@@ -55,7 +55,7 @@ static	char *update_saved(char *saved, const size_t line_len)
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
 	{
-		free(saved);
+		// free(saved);
 		updated = NULL;
 	}
 	else
@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 					free(temp);
 				}
 		}
-		// else
-		// 		free(saved);
+		else
+				free(saved);
 		 return line;
 }
