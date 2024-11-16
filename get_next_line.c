@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 			printf("end of gnl saved is true\n");
 		if (saved)
 		{
-			printf("freeing saved at end of gnl\n");
+			printf("saved at end of gnl=%s", saved);
 			// free(saved);
 		}
     return line;
