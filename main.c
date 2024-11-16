@@ -30,19 +30,19 @@ int	main(void)
 	char	*line;
 
 
-	// line = get_next_line(-1);
-	// printf("get_next_line: |%s", line);
-	// free(line);
-	// line = get_next_line(100);
-	// printf("get_next_line: |%s", line);
-	// free(line);
-	fd1 = open("41_with_nl", O_RDONLY);
-	line = get_next_line(fd1);
+	line = get_next_line(-1);
 	printf("get_next_line: |%s", line);
 	free(line);
-	line = get_next_line(fd1);
+	line = get_next_line(100);
 	printf("get_next_line: |%s", line);
-			free(line);
+	free(line);
+	// fd1 = open("41_with_nl", O_RDONLY);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// 		free(line);
 
 	close(fd1);
 	return (0);
