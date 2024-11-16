@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
 		{
-				printf("I'm here1\n");
+				// printf("I'm here1\n");
 				if (saved[0] != '\0')
 				{
 						line = extract_line(saved);
@@ -93,11 +93,11 @@ char	*get_next_line(int fd)
             }
             else
             {
-							printf("I'm here2\n");
+							// printf("I'm here2\n");
                 free(saved);
                 saved = NULL;
             }
-						printf("I'm here3\n");
+						// printf("I'm here3\n");
 
 						// free(temp);
 					}
