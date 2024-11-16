@@ -73,7 +73,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		if (!saved)
 			saved = ft_strdup("");
-		if (!read_line(fd, &saved))
+		if (!read_line(fd, &saved) && saved[0] != '\0')
 		{
 				// if (saved[0] == '\0')
 				// {
