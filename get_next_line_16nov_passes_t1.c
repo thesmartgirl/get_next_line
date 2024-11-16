@@ -47,29 +47,28 @@ static	char *extract_line(char *saved)
 	return line;
 }
 
-// static	char *update_saved(char *saved, const size_t line_len)
-// {
-// 	char *updated;
-// 	size_t updated_len;
-//
-// 	updated_len =  ft_strlen(saved) - line_len;
-// 	if (updated_len <= 0)
-// 	{
-// 		// free(saved);
-// 		updated = NULL;
-// 	}
-// 	else
-// 		updated = ft_substr(saved, line_len, updated_len);
-// 	// free(saved);
-// 	return updated;
-// }
+static	char *update_saved(char *saved, const size_t line_len)
+{
+	char *updated;
+	size_t updated_len;
+
+	updated_len =  ft_strlen(saved) - line_len;
+	if (updated_len <= 0)
+	{
+		// free(saved);
+		updated = NULL;
+	}
+	else
+		updated = ft_substr(saved, line_len, updated_len);
+	// free(saved);
+	return updated;
+}
 
 char	*get_next_line(int fd)
 {
     static char *saved;
 		char *line;
 		char *temp;
-		size_t updated_len;
 
 		line = NULL;
 		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
@@ -82,11 +81,11 @@ char	*get_next_line(int fd)
 				{
 					line = extract_line(saved);
 					temp = saved;
-					updated_len =  ft_strlen(saved) - ft_strlen(line);
-					if (updated_len <= 0)
-						free(saved);
-					else
-						saved = ft_substr(saved, line_len, updated_len);
+					saved = update_saved(saved, ft_strlen(line));
+					//
+					// if(temp)
+					// 		printf("end of gnl temp is true\n");
+					// printf("freeing temp in gnl\n");
 					free(temp);
 				}
 		}
