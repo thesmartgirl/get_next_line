@@ -91,7 +91,7 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*res;
@@ -112,5 +112,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	res[i] = '\0';
+	free(s);
 	return (res);
 }
