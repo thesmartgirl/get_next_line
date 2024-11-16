@@ -81,6 +81,13 @@ char	*get_next_line(int fd)
 		{
 			printf("I'm here1\n");
 
+				if (saved[0] == '\0')
+				{
+					printf("I'm here2\n");
+					printf("saved len = %ld\n", ft_strlen(saved));
+					// if(ft_strlen(saved) == 0)
+						free(saved);
+				}
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
@@ -91,13 +98,7 @@ char	*get_next_line(int fd)
 
 					free(temp);
 				}
-				else
-				{
-					printf("I'm here2\n");
-					printf("saved len = %ld\n", ft_strlen(saved));
-					// if(ft_strlen(saved) == 0)
-					// 	free(saved);
-				}
+
 		}
 		else
 				free(saved);
