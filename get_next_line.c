@@ -86,17 +86,17 @@ char	*get_next_line(int fd)
 						line = extract_line(saved);
 						line_len = ft_strlen(line);
 						updated_len =  ft_strlen(saved) - line_len;
-						if (updated_len > 0)
+						// if (updated_len > 0)
             {
 								temp = saved;
                 saved = ft_substr(saved, line_len, updated_len);
 								free(temp);
             }
-            else
-            {
-							  free(saved);
-                saved = NULL;
-            }
+            // else
+            // {
+						// 	  free(saved);
+            //     saved = NULL;
+            // }
 				}
 		}
 		else
