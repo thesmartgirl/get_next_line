@@ -50,7 +50,8 @@ static	char *extract_line(char **saved)
 		line = ft_strdup(*saved);
 	line_len =  ft_strlen(line);
 	temp = *saved;
-	*saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
+	// *saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
+	*saved = NULL;
 	free(temp);
 	return line;
 }
