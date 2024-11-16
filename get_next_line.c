@@ -84,11 +84,10 @@ char	*get_next_line(int fd)
 				else
 				{
 						line = extract_line(saved);
-						line_len = ft_strlen(line);
-						updated_len =  ft_strlen(saved) - line_len;
+						updated_len =  ft_strlen(saved) - ft_strlen(line);
             {
 								temp = saved;
-                saved = ft_substr(saved, line_len, updated_len);
+                saved = ft_substr(saved, ft_strlen(line), updated_len);
 								free(temp);
             }
 				}
