@@ -70,6 +70,7 @@ char	*get_next_line(int fd)
 		char *line;
 		char *temp;
 		size_t updated_len;
+		size_t line_len;
 
 		line = NULL;
 		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
@@ -82,7 +83,8 @@ char	*get_next_line(int fd)
 				{
 					line = extract_line(saved);
 					temp = saved;
-					updated_len =  ft_strlen(saved) - ft_strlen(line);
+					line_len = ft_strlen(line);
+					updated_len =  ft_strlen(saved) - line_len;
 					if (updated_len <= 0)
 						free(saved);
 					else
