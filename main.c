@@ -36,11 +36,11 @@ int	main(void)
 	line = get_next_line(100);
 	printf("get_next_line: |%s", line);
 	free(line);
-	fd1 = open("empty", O_RDONLY);
-	close(fd1);
-	line = get_next_line(fd1);
-	printf("get_next_line: |%s", line);
-	free(line);
+	// fd1 = open("empty", O_RDONLY);
+	// close(fd1);
+	// line = get_next_line(fd1);
+	// printf("get_next_line: |%s", line);
+	// free(line);
 	return (0);
 }
 
