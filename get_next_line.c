@@ -51,11 +51,14 @@ static	char *update_saved( char *saved, const size_t line_len)
 {
 	char *updated;
 	size_t updated_len;
+	char *temp;
 
+	temp = saved;
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
-		return NULL;
+		updated = NULL;
 	updated = ft_substr(saved, line_len, updated_len);
+	free(temp);
 	return updated;
 }
 
@@ -63,7 +66,6 @@ char	*get_next_line(int fd)
 {
     static char *saved;
 		char *line;
-		char *temp;
 
 		line = NULL;
 		if (!saved)
@@ -73,9 +75,7 @@ char	*get_next_line(int fd)
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
-					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
-					free(temp);
 				}
 		}
     return line;
