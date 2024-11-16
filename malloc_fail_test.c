@@ -31,7 +31,7 @@ void test_get_next_line_with_malloc_failure(const char *filename)
     }
 
     // Simulate malloc failure on the 3rd allocation (change for different tests)
-    malloc_fail_at = 2;
+    malloc_fail_at = 1;
 
     char *line;
     while ((line = get_next_line(fd)) != NULL) {
