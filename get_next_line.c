@@ -89,6 +89,7 @@ char	*get_next_line(int fd)
 						if (updated_len > 0)  // If there is remaining data in saved.
             {
                 saved = ft_substr(saved, line_len, updated_len);  // Update saved with remaining data.
+								free(temp);
             }
             else
             {
@@ -98,7 +99,7 @@ char	*get_next_line(int fd)
             }
 						printf("I'm here3\n");
 
-						free(temp);
+						// free(temp);
 					}
 		}
 		else
