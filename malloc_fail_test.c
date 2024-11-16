@@ -14,7 +14,10 @@ void *my_malloc(size_t size)
 
     // Simulate malloc failure after 'malloc_fail_at' calls
     if (malloc_call_count == malloc_fail_at)
+    {
+      printf("simulated malloc failure\n" );
         return NULL;
+      }
 
     return malloc(size);
 }
