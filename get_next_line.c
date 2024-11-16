@@ -58,7 +58,6 @@ static	char *update_saved( char *saved, const size_t line_len)
 {
 	char *updated;
 	size_t updated_len;
-	char *temp;
 
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
