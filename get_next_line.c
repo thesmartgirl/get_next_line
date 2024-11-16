@@ -91,9 +91,9 @@ char	*get_next_line(int fd)
 
 					free(temp);
 				}
-				printf("saved len = %ld\n", ft_strlen(saved));
-				if(ft_strlen(saved) == 0)
-					free(saved);
+				// printf("saved len = %ld\n", ft_strlen(saved));
+				// if(ft_strlen(saved) == 0)
+				// 	free(saved);
 		}
 		else
 		{
