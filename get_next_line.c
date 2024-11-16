@@ -47,7 +47,7 @@ static	char *extract_line(char **saved)
 	if (nl > 0 || (*saved)[0] == '\n')
 		line = ft_substr(*saved, 0, nl+1);
 	else
-		line = NULL; //ft_strdup(*saved);
+		line = ft_strdup(*saved);
 	line_len =  ft_strlen(line);
 	temp = *saved;
 	*saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
