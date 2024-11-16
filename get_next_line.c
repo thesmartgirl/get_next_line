@@ -91,15 +91,12 @@ char	*get_next_line(int fd)
                 saved = ft_substr(saved, line_len, updated_len);  // Update saved with remaining data.
 								free(temp);
             }
-            // else
-            // {
-						// 	// printf("I'm here2\n");
-            //     free(saved);
-            //     saved = NULL;
-            // }
-				}
-				if (line == NULL) {
-					free(saved);
+            else
+            {
+							// printf("I'm here2\n");
+                free(saved);
+                saved = NULL;
+            }
 				}
 		}
 		else
