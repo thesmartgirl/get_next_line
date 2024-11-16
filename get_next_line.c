@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 					line_len = ft_strlen(line);
 					updated_len =  ft_strlen(saved) - line_len;
 					saved = ft_substr(saved, line_len, updated_len);
-					printf(saved len = "%ld\n", ft_strlen(saved));
+					printf("saved len = %ld\n", ft_strlen(saved));
 					if(ft_strlen(saved) == 0)
 						free(saved);
 					free(temp);
