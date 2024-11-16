@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 					free(temp);
 				}
 		}
-		else
-				free(saved);
+		// else
+		// 		free(saved);
 		 return line;
 }
