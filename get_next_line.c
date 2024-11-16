@@ -47,6 +47,7 @@ static	char *extract_line(char *saved)
 	{
 		line = ft_strdup(saved);
 		free(saved);
+		saved = ft_strdup("");
 	}
 	return line;
 }
@@ -84,6 +85,5 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 				}
 		}
-		// printf("saved at the end of gnl = %s", saved);
     return line;
 }
