@@ -67,7 +67,6 @@ char	*get_next_line(int fd)
 		char *line;
 		char *temp;
 		size_t updated_len;
-		size_t line_len;
 
 		line = NULL;
 		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
@@ -76,12 +75,12 @@ char	*get_next_line(int fd)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
 		{
-				if (saved[0] == '\0')
-				{
-					free(saved);
-					saved = NULL;
-				}
-				else
+				// if (saved[0] == '\0')
+				// {
+				// 	free(saved);
+				// 	saved = NULL;
+				// }
+				// else
 				{
 						line = extract_line(saved);
 						updated_len =  ft_strlen(saved) - ft_strlen(line);
@@ -92,7 +91,7 @@ char	*get_next_line(int fd)
             }
 				}
 		}
-		else
+		// else
     {
         free(saved);
 				saved = NULL;
