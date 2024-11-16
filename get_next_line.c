@@ -93,6 +93,9 @@ char	*get_next_line(int fd)
 				}
 		}
 		else
+		{
+				printf("I'm here\n");
 				free(saved);
+			}
 		 return line;
 }
