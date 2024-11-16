@@ -80,7 +80,13 @@ char	*get_next_line(int fd)
 		if (!read_line(fd, &saved))
 		{
 				// printf("I'm here1\n");
-				if (saved[0] != '\0')
+				if (saved[0] == '\0')
+				{
+					//handle EOF
+					free(saved);
+					saved = NULL;
+				}
+				else
 				{
 						line = extract_line(saved);
 
