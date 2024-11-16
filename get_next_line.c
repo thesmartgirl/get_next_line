@@ -92,10 +92,12 @@ char	*get_next_line(int fd)
             }
             else
             {
-                // No remaining data, so clear saved.
+							printf("I'm here2\n");
                 free(saved);
                 saved = NULL;
             }
+						printf("I'm here3\n");
+
 						free(temp);
 					}
 		}
