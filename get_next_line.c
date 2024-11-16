@@ -52,9 +52,6 @@ static	char *extract_line(char **saved)
 	temp = *saved;
 	*saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
 	free(temp);
-	if (line == NULL) {
-		return NULL;
-	}
 	return line;
 }
 
