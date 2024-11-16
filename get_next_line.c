@@ -15,6 +15,8 @@ static int read_line(int fd, char **saved)
 		return 1;
 	}
 	bytes_read = 1;
+	if (!saved)
+		saved = ft_strdup("");
 	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
