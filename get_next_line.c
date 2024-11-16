@@ -87,5 +87,7 @@ char	*get_next_line(int fd)
 					free(temp);
 				}
 		}
+		if (saved[0] == '\0')
+			free(saved);
     return line;
 }
