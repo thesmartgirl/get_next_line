@@ -72,7 +72,8 @@ char	*gnl_strjoin(char *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = 0;
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	// str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = NULL; //simulate malloc failure
 	if (str != NULL)
 	{
 		while (s1[i])
@@ -102,8 +103,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	// res = (char *)malloc((len + 1) * sizeof(char));
-	// if (!res)
+	res = (char *)malloc((len + 1) * sizeof(char));
+	if (!res)
 		return (NULL);
 	i = 0;
 	while (i < len)
