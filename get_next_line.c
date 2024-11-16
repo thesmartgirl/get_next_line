@@ -69,6 +69,7 @@ char	*get_next_line(int fd)
 		if (!saved)
 			saved = ft_strdup("");
 		if (!read_line(fd, &saved))
+		{
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
@@ -76,5 +77,6 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 					free(temp);
 				}
+		}
     return line;
 }
