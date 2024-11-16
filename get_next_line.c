@@ -11,7 +11,8 @@ static int read_line(int fd, char **saved)
 	buff = (char *)malloc(BUFFER_SIZE + 1);
 	if(!buff)
 	{
-		free(*saved);
+		if(*saved)
+			free(*saved);
 		return 1;
 	}
 	bytes_read = 1;
@@ -46,9 +47,9 @@ static	char *extract_line(char *saved)
 	else
 	{
 		line = ft_strdup(saved);
-		if (saved)
-        free(saved);
-		saved = ft_strdup("");
+		// if (saved)
+    //     free(saved);
+		// saved = ft_strdup("");
 	}
 	return line;
 }
@@ -59,12 +60,10 @@ static	char *update_saved( char *saved, const size_t line_len)
 	size_t updated_len;
 	char *temp;
 
-	temp = saved;
 	updated_len =  ft_strlen(saved) - line_len;
 	if (updated_len <= 0)
 		updated = NULL;
 	updated = ft_substr(saved, line_len, updated_len);
-	free(temp);
 	return updated;
 }
 
@@ -72,6 +71,7 @@ char	*get_next_line(int fd)
 {
     static char *saved;
 		char *line;
+		char *temp;
 
 		line = NULL;
 		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
@@ -83,7 +83,9 @@ char	*get_next_line(int fd)
 				if (saved[0] != '\0')
 				{
 					line = extract_line(saved);
+					temp = saved;
 					saved = update_saved(saved, ft_strlen(line));
+					free(saved);
 				}
 		}
     return line;
