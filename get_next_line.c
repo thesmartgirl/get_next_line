@@ -78,5 +78,6 @@ char	*get_next_line(int fd)
 					saved = update_saved(saved, ft_strlen(line));
 				}
 		}
+		printf("saved at the end of gnl = %s\n", saved);
     return line;
 }
