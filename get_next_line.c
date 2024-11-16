@@ -44,7 +44,10 @@ static	char *extract_line(const char *saved)
 	if (nl > 0 || saved[0] == '\n')
 		line = ft_substr(saved, 0, nl+1);
 	else
+	{
 		line = ft_strdup(saved);
+		free(saved);
+	}
 	return line;
 }
 
