@@ -83,7 +83,6 @@ char	*get_next_line(int fd)
 					free(saved);
 					saved = NULL;
 				}
-				return NULL;
     }
 		return line;
 }
