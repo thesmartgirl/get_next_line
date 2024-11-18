@@ -11,7 +11,12 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+static char *cleanup(char *line_draft, int fd)
+{
+	free(line_draft[fd]);
+	line_draft[fd] = NULL;
+	return NULL;
+}
 static char	*extract_line(char **line_draft, int fd)
 {
 	char	*tmp;
@@ -25,7 +30,7 @@ static char	*extract_line(char **line_draft, int fd)
 	if (i == -1)
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
-			return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+			return (cleanup(line_draft, fd));
 		line = ft_strdup(line_draft[fd]);
 		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
 	}
