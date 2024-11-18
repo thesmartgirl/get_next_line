@@ -28,7 +28,7 @@ static char	*extract_line(char **line_draft, int fd)
 		return (NULL);
 	tmp = line_draft[fd];
 	nl = 0;
-	while (line_draft[fd] != '\n' && line_draft[fd] !='\0') {
+	while (line_draft[fd][nl] != '\n' && line_draft[fd][nl] !='\0') {
 		nl++;
 	}
 	if (nl == 0 && line_draft[fd][0] != '\n')
@@ -46,7 +46,7 @@ static char	*extract_line(char **line_draft, int fd)
 		cleanup_fd(line_draft, fd);
 		return (NULL);
 	}
-	line_draft[fd] = ft_substr(tmp, nl + 1, (ft_strlen(tmp) - i));
+	line_draft[fd] = ft_substr(tmp, nl + 1, (ft_strlen(tmp) - nl));
 	free(tmp);
 	return (line);
 }
