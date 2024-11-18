@@ -15,6 +15,7 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
+	printf("strlen\n");
 
 	i = 0;
 	if (str == NULL)
@@ -28,6 +29,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 	char			cc;
+	printf("ft_strchr\n");
 
 	cc = (char)c;
 	i = 0;
@@ -46,6 +48,8 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strdup(const char *str)
 {
+	printf("strdup\n");
+
 	char	*new_str;
 	int		i;
 
@@ -69,6 +73,7 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	char	*str;
 	int		i;
 	int		j;
+	printf("gnl_strjoin\n");
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
@@ -98,6 +103,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*res;
+	printf("ft_substr\n");
 
 	if (!s)
 		return (NULL);
