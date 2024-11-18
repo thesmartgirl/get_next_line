@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-static char *cleanup(char *line_draft, int fd)
+static char *cleanup(char **line_draft, int fd)
 {
 	free(line_draft[fd]);
 	line_draft[fd] = NULL;
