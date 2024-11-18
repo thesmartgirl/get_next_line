@@ -78,8 +78,11 @@ char	*get_next_line(int fd)
 		else
     {
 				printf("Hello read_line returned 1\n" );
-        free(saved);
-				saved = NULL;
+				if(saved)
+				{
+					free(saved);
+					saved = NULL;
+				}
     }
 		return line;
 }
