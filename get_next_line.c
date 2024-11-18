@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static void free_static_variable(char **var)
+static void free_static_variable(void *var)
 {
 	if(var)
 	{
