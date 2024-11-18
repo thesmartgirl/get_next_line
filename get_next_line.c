@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -93,7 +94,7 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 char	*get_next_line(int fd)
 {
 	char		*buff;
-	static char	*line_draft[FOPEN_MAX];
+	static char	*line_draft[1];
 	char *line;
 
 	line = NULL;
