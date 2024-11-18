@@ -12,12 +12,6 @@
 
 #include "get_next_line.h"
 
-static void free_static_var(void * var)
-{
-	free(var);
-	var = NULL;
-}
-
 static char	*extract_line(char **line_draft, int fd)
 {
 	char	*tmp;
@@ -31,23 +25,15 @@ static char	*extract_line(char **line_draft, int fd)
 	if (i == -1)
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
-		{
-			free_static_var(line_draft[fd]);
-			return (NULL);
-		}
+			return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
 		line = ft_strdup(line_draft[fd]);
-		free_static_var(line_draft[fd]);
-		return (NULL);
+		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
 	}
 	line = ft_substr(tmp, 0, i + 1);
 	if (line == NULL)
-		{
-			free_static_var(line_draft[fd]);
-			return (NULL);
-		}
+		return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
 	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
-	free(tmp);
-	return (line);
+	return (free(tmp), line);
 }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
