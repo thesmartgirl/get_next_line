@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # ifndef FD_MAX
 #  define FD_MAX FOPEN_MAX
