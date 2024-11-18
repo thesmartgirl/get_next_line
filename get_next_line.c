@@ -1,90 +1,76 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 19:27:42 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/12 17:49:58 by ataan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int read_line(int fd, char **saved)
+#include "get_next_line_bonus.h"
+
+static char	*extract_line(char **line_draft, int fd)
 {
-	int bytes_read;
-	char *buff;
+	char	*tmp;
+	char	*line;
+	int		i;
 
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	if(!buff)
-		return 1;
-	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(*saved, '\n'))
+	if (!line_draft[fd])
+		return (NULL);
+	tmp = line_draft[fd];
+	i = ft_strchr(line_draft[fd], '\n');
+	if (i == -1)
 	{
-		printf("main while loop\n");
-		bytes_read = read(fd, buff, BUFFER_SIZE);
-		if (bytes_read == 0)
-			break;
-		if (bytes_read < 0)
-		{
-			free(buff);
-			return 1;
-		}
-		buff[bytes_read] = '\0';
-		*saved = gnl_strjoin(*saved, buff);
-		if (*saved == NULL)
-		{
-			free(buff);
-			return 1;
-		}
+		if (ft_strlen(line_draft[fd]) == 0)
+			return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+		line = ft_strdup(line_draft[fd]);
+		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
 	}
-	free(buff);
-	return 0;
+	line = ft_substr(tmp, 0, i + 1);
+	if (line == NULL)
+		return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
+	return (free(tmp), line);
 }
 
-static	char *extract_line(char **saved)
+static char	*read_line(char *buff, char **line_draft, int fd)
 {
-	char *line;
-	int nl;
-	char *temp;
-	size_t line_len;
+	int	bytes_read;
 
-	nl = 0;
-	while ((*saved)[nl] != '\n' && (*saved)[nl] != '\0')
-		nl++;
-	if (nl > 0 || (*saved)[0] == '\n')
-		line = ft_substr(*saved, 0, nl+1);
-	else
-		line = ft_strdup(*saved);
-	line_len =  ft_strlen(line);
-	temp = *saved;
-	*saved = ft_substr(*saved, line_len, ft_strlen(*saved) - line_len);
-	free(temp);
-	return line;
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		if (ft_strchr(line_draft[fd], '\n') == -1)
+		{
+			buff = (char *)malloc(BUFFER_SIZE + 1);
+			if (buff == NULL)
+				return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+			bytes_read = read(fd, buff, BUFFER_SIZE);
+			if (bytes_read == -1)
+				return (free(buff), free(line_draft[fd]), line_draft[fd] = NULL,
+					NULL);
+			buff[bytes_read] = '\0';
+			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
+			free(buff);
+		}
+		else
+			return (extract_line(line_draft, fd));
+	}
+	return (extract_line(line_draft, fd));
 }
 
 char	*get_next_line(int fd)
 {
-    static char *saved;
-		char *line;
+	char		*buff;
+	static char	*line_draft[FOPEN_MAX];
 
-		line = NULL;
-		if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
-			return (NULL);
-		if (!saved)
-			saved = ft_strdup("");
-		if (!read_line(fd, &saved))
-		{
-				if (saved[0] == '\0')
-				{
-					free(saved);
-					saved = NULL;
-				}
-				else
-						line = extract_line(&saved);
-		}
-		else
-    {
-				printf("Hello read_line returned 1\n" );
-				if(saved)
-				{
-					free(saved);
-					saved = NULL;
-				}
-    }
-		printf("returning line = %s\n", line);
-		return line;
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (line_draft[fd] == NULL)
+		line_draft[fd] = ft_strdup("");
+	buff = NULL;
+	return (read_line(buff, line_draft, fd));
 }
