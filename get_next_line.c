@@ -22,11 +22,16 @@ static char	*extract_line(char **line_draft, int fd)
 {
 	char	*tmp;
 	char	*line;
+	int nl;
 
 	if (!line_draft[fd])
 		return (NULL);
 	tmp = line_draft[fd];
-	if (!ft_strchr(line_draft[fd], '\n'))
+	nl = 0;
+	while (line_draft[fd] != '\n' && line_draft[fd] !='\0') {
+		nl++;
+	}
+	if (nl == 0 && line_draft[fd][0] != '\n')
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
 			line = NULL;
@@ -35,13 +40,13 @@ static char	*extract_line(char **line_draft, int fd)
 		cleanup_fd(line_draft, fd);
 		return (line);
 	}
-	line = ft_substr(tmp, 0, i + 1);
+	line = ft_substr(tmp, 0, nl + 1);
 	if (line == NULL)
 	{
 		cleanup_fd(line_draft, fd);
 		return (NULL);
 	}
-	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
+	line_draft[fd] = ft_substr(tmp, nl + 1, (ft_strlen(tmp) - i));
 	free(tmp);
 	return (line);
 }
