@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void cleanup_fd(char **line_draft, int fd)
 {
@@ -95,8 +95,8 @@ char	*get_next_line(int fd)
 	char		*buff;
 	static char	*line_draft[FOPEN_MAX];
 	char *line;
-
 	line = NULL;
+
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (line_draft[fd] == NULL)
