@@ -58,6 +58,7 @@ static char *update_line_draft(char **line_draft, int fd, char *line)
 	line_draft[fd] = ft_substr(tmp, ft_strlen(line), (ft_strlen(line_draft[fd])
 		- ft_strlen(line)));
 	free(tmp);
+	return line_draft[fd];
 }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
