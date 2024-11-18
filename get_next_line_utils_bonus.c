@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 19:28:19 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/14 14:54:16 by ataan            ###   ########.fr       */
+/*   Created: 2024/11/08 19:28:02 by ataan             #+#    #+#             */
+/*   Updated: 2024/11/08 19:28:08 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
-	size_t	i;
-	printf("strlen\n");
+	int	i;
 
 	i = 0;
 	if (str == NULL)
@@ -25,31 +24,24 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(char *str, char ch)
 {
-	unsigned int	i;
-	char			cc;
-	printf("ft_strchr\n");
+	int	i;
 
-	cc = (char)c;
 	i = 0;
-	if(s == NULL)
-		return (NULL);
-	while (s[i])
+	if (str == NULL)
+		return (-1);
+	while (str[i])
 	{
-		if (s[i] == cc)
-			return ((char *)&s[i]);
+		if (str[i] == ch)
+			return (i);
 		i++;
 	}
-	if (s[i] == cc)
-		return ((char *)&s[i]);
-	return (NULL);
+	return (-1);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(char *str)
 {
-	printf("strdup\n");
-
 	char	*new_str;
 	int		i;
 
@@ -68,19 +60,17 @@ char	*ft_strdup(const char *str)
 	return (new_str);
 }
 
-char	*gnl_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
 	int		j;
-	printf("gnl_strjoin\n");
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	// str = NULL;
 	if (str != NULL)
 	{
 		while (s1[i])
@@ -99,27 +89,29 @@ char	*gnl_strjoin(char *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *str, int start, int size)
 {
-	size_t	i;
-	char	*res;
-	printf("ft_substr\n");
+	char	*new_str;
+	int		len;
+	int		i;
 
-	if (!s)
+	if (str == NULL)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start > ft_strlen(str))
 		return (ft_strdup(""));
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (!res)
+	len = ft_strlen(&str[start]);
+	if (len < size)
+		size = len;
+	new_str = malloc((size + 1) * sizeof(char));
+	if (new_str == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i < size)
 	{
-		res[i] = s[start + i];
+		new_str[i] = str[start];
+		start++;
 		i++;
 	}
-	res[i] = '\0';
-	return (res);
+	new_str[i] = '\0';
+	return (new_str);
 }
