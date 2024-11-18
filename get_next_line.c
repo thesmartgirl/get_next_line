@@ -85,5 +85,6 @@ char	*get_next_line(int fd)
 					saved = NULL;
 				}
     }
+		printf("returning line = %s\n", line);
 		return line;
 }
