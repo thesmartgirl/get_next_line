@@ -118,7 +118,7 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
 	}
 	free(buff);
-	return ("OK"); //Empty file? or EOF?
+	return ("OK");
 }
 
 char	*get_next_line(int fd)
@@ -138,6 +138,5 @@ char	*get_next_line(int fd)
 		line = extract_line(line_draft, fd);
 		line_draft[fd] = update_line_draft(line_draft, fd, line);
 	}
-	// printf("returning line = %s\n", line );
 	return(line);
 }
