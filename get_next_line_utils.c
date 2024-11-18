@@ -24,21 +24,43 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strchr(char *str, char ch)
-{
-	int	i;
+// int	ft_strchr(char *str, char ch)
+// {
+// 	int	i;
+//
+// 	i = 0;
+// 	if (str == NULL)
+// 		return (-1);
+// 	while (str[i])
+// 	{
+// 		if (str[i] == ch)
+// 			return (i);
+// 		i++;
+// 	}
+// 	return (-1);
+// }
 
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned int	i;
+	char			cc;
+	// printf("ft_strchr\n");
+
+	cc = (char)c;
 	i = 0;
-	if (str == NULL)
-		return (-1);
-	while (str[i])
+	if(s == NULL)
+		return (NULL);
+	while (s[i])
 	{
-		if (str[i] == ch)
-			return (i);
+		if (s[i] == cc)
+			return ((char *)&s[i]);
 		i++;
 	}
-	return (-1);
+	if (s[i] == cc)
+		return ((char *)&s[i]);
+	return (NULL);
 }
+
 
 char	*ft_strdup(char *str)
 {

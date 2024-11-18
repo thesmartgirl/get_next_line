@@ -18,58 +18,54 @@ static void cleanup_fd(char **line_draft, int fd)
 	line_draft[fd] = NULL;
 }
 
-// static char	*extract_line(char **line_draft, int fd)
-// {
-// 	char	*tmp;
-// 	char	*line;
-// 	int		i;
-//
-// 	if (!line_draft[fd])
-// 		return (NULL);
-// 	tmp = line_draft[fd];
-// 	i = ft_strchr(line_draft[fd], '\n');
-// 	if (i == -1)
-// 	{
-// 		if (ft_strlen(line_draft[fd]) == 0)
-// 		{
-// 			cleanup_fd(line_draft, fd);
-// 			return (NULL);
-// 		}
-// 		line = ft_strdup(line_draft[fd]);
-// 		cleanup_fd(line_draft, fd);
-// 		return (line);
-// 	}
-// 	line = ft_substr(tmp, 0, i + 1);
-// 	if (line == NULL)
-// 	{
-// 		cleanup_fd(line_draft, fd);
-// 		return (NULL);
-// 	}
-// 	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
-// 	free(tmp);
-// 	return (line);
-// }
-
-static	char *extract_line(char **saved, int fd)
+static char	*extract_line(char **line_draft, int fd)
 {
-	char *line;
-	int nl;
-	char *temp;
-	size_t line_len;
+	char	*tmp;
+	char	*line;
 
-	nl = 0;
-	while (saved[fd][nl] != '\n' && saved[fd][nl] != '\0')
-		nl++;
-	if (nl > 0 || saved[fd][0] == '\n')
-		line = ft_substr(saved[fd], 0, nl+1);
-	else
-		line = ft_strdup(saved[fd]);
-	line_len =  ft_strlen(line);
-	temp = saved[fd];
-	saved[fd] = ft_substr(saved[fd], line_len, ft_strlen(saved[fd]) - line_len);
-	free(temp);
-	return line;
+	if (!line_draft[fd])
+		return (NULL);
+	tmp = line_draft[fd];
+	if (!ft_strchr(line_draft[fd], '\n'))
+	{
+		if (ft_strlen(line_draft[fd]) == 0)
+			line = NULL;
+		else
+			line = ft_strdup(line_draft[fd]);
+		cleanup_fd(line_draft, fd);
+		return (line);
+	}
+	line = ft_substr(tmp, 0, i + 1);
+	if (line == NULL)
+	{
+		cleanup_fd(line_draft, fd);
+		return (NULL);
+	}
+	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
+	free(tmp);
+	return (line);
 }
+
+// static	char *extract_line(char **saved, int fd)
+// {
+// 	char *line;
+// 	int nl;
+// 	char *temp;
+// 	size_t line_len;
+//
+// 	nl = 0;
+// 	while (saved[fd][nl] != '\n' && saved[fd][nl] != '\0')
+// 		nl++;
+// 	if (nl > 0 || saved[fd][0] == '\n')
+// 		line = ft_substr(saved[fd], 0, nl+1);
+// 	else
+// 		line = ft_strdup(saved[fd]);
+// 	line_len =  ft_strlen(line);
+// 	temp = saved[fd];
+// 	saved[fd] = ft_substr(saved[fd], line_len, ft_strlen(saved[fd]) - line_len);
+// 	free(temp);
+// 	return line;
+// }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
 {
