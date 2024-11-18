@@ -66,11 +66,14 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	static char	*line_draft[FOPEN_MAX];
+	char *line;
 
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (line_draft[fd] == NULL)
 		line_draft[fd] = ft_strdup("");
 	buff = NULL;
-	return (read_line(buff, line_draft, fd));
+	line = read_line(buff, line_draft, fd);
+	printf("returning line = %s\n", line );
+	return(line);
 }
