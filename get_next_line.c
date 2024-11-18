@@ -41,7 +41,7 @@ static char	*extract_line(char **line_draft, int fd)
 		cleanup_fd(line_draft, fd);
 		return (line);
 	}
-	line = ft_substr(tmp, 0, nl + 1);
+	line = ft_substr(line_draft[fd], 0, nl + 1);
 	if (line == NULL)
 	{
 		cleanup_fd(line_draft, fd);
