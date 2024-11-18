@@ -14,19 +14,20 @@
 
 static void cleanup_fd(char **line_draft, int fd)
 {
-	free(line_draft[fd]);
-	line_draft[fd] = NULL;
+	if(line_draft[fd])
+	{
+		free(line_draft[fd]);
+		line_draft[fd] = NULL;
+	}
 }
 
 static char	*extract_line(char **line_draft, int fd)
 {
-	char	*tmp;
 	char	*line;
 	int nl;
 
 	if (!line_draft[fd])
 		return (NULL);
-	tmp = line_draft[fd];
 	nl = 0;
 	while (line_draft[fd][nl] != '\n' && line_draft[fd][nl] !='\0') {
 		nl++;
@@ -46,31 +47,18 @@ static char	*extract_line(char **line_draft, int fd)
 		cleanup_fd(line_draft, fd);
 		return (NULL);
 	}
-	line_draft[fd] = ft_substr(tmp, nl + 1, (ft_strlen(tmp) - nl));
-	free(tmp);
-	return (line);
+		return (line);
 }
 
-// static	char *extract_line(char **saved, int fd)
-// {
-// 	char *line;
-// 	int nl;
-// 	char *temp;
-// 	size_t line_len;
-//
-// 	nl = 0;
-// 	while (saved[fd][nl] != '\n' && saved[fd][nl] != '\0')
-// 		nl++;
-// 	if (nl > 0 || saved[fd][0] == '\n')
-// 		line = ft_substr(saved[fd], 0, nl+1);
-// 	else
-// 		line = ft_strdup(saved[fd]);
-// 	line_len =  ft_strlen(line);
-// 	temp = saved[fd];
-// 	saved[fd] = ft_substr(saved[fd], line_len, ft_strlen(saved[fd]) - line_len);
-// 	free(temp);
-// 	return line;
-// }
+static char *update_line_draft(char **line_draft, int fd, char *line)
+{
+	char	*tmp;
+
+	tmp = line_draft[fd];
+	line_draft[fd] = ft_substr(tmp, ft_strlen(line), (ft_strlen(line_draft[fd])
+		- ft_strlen(line)));
+	free(tmp);
+}
 
 static char	*read_line(char *buff, char **line_draft, int fd)
 {
@@ -99,9 +87,9 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 			free(buff);
 		}
 		else
-			return (extract_line(line_draft, fd));
+			return (line_draft[fd]);
 	}
-	return (extract_line(line_draft, fd));
+	return (line_draft[fd]);
 }
 
 char	*get_next_line(int fd)
@@ -115,7 +103,11 @@ char	*get_next_line(int fd)
 	if (line_draft[fd] == NULL)
 		line_draft[fd] = ft_strdup("");
 	buff = NULL;
-	line = read_line(buff, line_draft, fd);
+	if (read_line(buff, line_draft, fd))
+	{
+		line = extract_line(line_draft, fd);
+		line_draft[fd] = update_line_draft(line_draft, fd, line);
+	}
 	// printf("returning line = %s\n", line );
 	return(line);
 }
