@@ -99,6 +99,7 @@ char	*get_next_line(int fd)
 	static char	*line_draft[FOPEN_MAX];
 	char *line;
 
+	line = NULL;
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (line_draft[fd] == NULL)
