@@ -88,9 +88,9 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 			free(buff);
 		}
 		else
-			return (line_draft[fd]);
+			return ("OK");
 	}
-	return (line_draft[fd]);
+	return ("OK");
 }
 
 char	*get_next_line(int fd)
