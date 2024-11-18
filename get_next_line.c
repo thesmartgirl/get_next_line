@@ -118,7 +118,8 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
 			free(buff);
 	}
-	free(buff);
+	if(buff)
+		free(buff);
 	return ("OK"); //Empty file? or EOF?
 }
 
