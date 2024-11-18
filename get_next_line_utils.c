@@ -24,27 +24,10 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-// int	ft_strchr(char *str, char ch)
-// {
-// 	int	i;
-//
-// 	i = 0;
-// 	if (str == NULL)
-// 		return (-1);
-// 	while (str[i])
-// 	{
-// 		if (str[i] == ch)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (-1);
-// }
-
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 	char			cc;
-	// printf("ft_strchr\n");
 
 	cc = (char)c;
 	i = 0;
@@ -60,7 +43,6 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
-
 
 char	*ft_strdup(char *str)
 {
