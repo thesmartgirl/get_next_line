@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-static void cleanup(char *var)
+
+static void cleanup_fd(char **line_draft, int fd)
 {
-	free(var);
-	var = NULL;
+	free(line_draft[fd]);
+	line_draft[fd] = NULL;
 }
 
 static char	*extract_line(char **line_draft, int fd)
@@ -31,17 +32,22 @@ static char	*extract_line(char **line_draft, int fd)
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
 		{
-			cleanup(line_draft[fd]);
+			cleanup_fd(line_draft, fd);
 			return (NULL);
 		}
 		line = ft_strdup(line_draft[fd]);
-		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
+		cleanup_fd(line_draft, fd);
+		return (line);
 	}
 	line = ft_substr(tmp, 0, i + 1);
 	if (line == NULL)
-		return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+	{
+		cleanup_fd(line_draft, fd);
+		return (NULL);
+	}
 	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
-	return (free(tmp), line);
+	free(tmp);
+	return (line);
 }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
