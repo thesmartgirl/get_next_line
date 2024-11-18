@@ -31,6 +31,8 @@ char	*ft_strchr(const char *s, int c)
 
 	cc = (char)c;
 	i = 0;
+	if(s == NULL)
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] == cc)
