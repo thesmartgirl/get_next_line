@@ -32,17 +32,22 @@ static char	*extract_line(char **line_draft, int fd)
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
 		{
-			free_var(line_draft[fd]);
+			free_static_var(line_draft[fd]);
 			return (NULL);
 		}
 		line = ft_strdup(line_draft[fd]);
-		return (free(line_draft[fd]), line_draft[fd] = NULL, line);
+		free_static_var(line_draft[fd]);
+		return (NULL);
 	}
 	line = ft_substr(tmp, 0, i + 1);
 	if (line == NULL)
-		return (free(line_draft[fd]), line_draft[fd] = NULL, NULL);
+		{
+			free_static_var(line_draft[fd]);
+			return (NULL);
+		}
 	line_draft[fd] = ft_substr(tmp, i + 1, (ft_strlen(tmp) - i));
-	return (free(tmp), line);
+	free(tmp);
+	return (line);
 }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
