@@ -61,15 +61,44 @@ static char *update_line_draft(char **line_draft, int fd, char *line)
 	return line_draft[fd];
 }
 
+// static char	*read_line(char *buff, char **line_draft, int fd)
+// {
+// 	int	bytes_read;
+//
+// 	bytes_read = 1;
+// 	while (bytes_read > 0)
+// 	{
+// 		if (!ft_strchr(line_draft[fd], '\n'))
+// 		{
+// 			buff = (char *)malloc(BUFFER_SIZE + 1);
+// 			if (buff == NULL)
+// 			{
+// 				cleanup_fd(line_draft, fd);
+// 				return (NULL);
+// 			}
+// 			bytes_read = read(fd, buff, BUFFER_SIZE);
+// 			if (bytes_read == -1)
+// 			{
+// 				free(buff);
+// 				cleanup_fd(line_draft, fd);
+// 				return (NULL);
+// 			}
+// 			buff[bytes_read] = '\0';
+// 			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
+// 			free(buff);
+// 		}
+// 		else
+// 			return ("OK");
+// 	}
+// 	return ("OK"); //EOF
+// }
 static char	*read_line(char *buff, char **line_draft, int fd)
 {
 	int	bytes_read;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (bytes_read > 0 && !ft_strchr(line_draft[fd], '\n'))
 	{
-		if (!ft_strchr(line_draft[fd], '\n'))
-		{
 			buff = (char *)malloc(BUFFER_SIZE + 1);
 			if (buff == NULL)
 			{
@@ -83,14 +112,13 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 				cleanup_fd(line_draft, fd);
 				return (NULL);
 			}
+			if (bytes_read == 0)
+				break;
 			buff[bytes_read] = '\0';
 			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
 			free(buff);
-		}
-		else
-			return ("OK");
 	}
-	return ("OK");
+	return ("OK"); //Empty file? or EOF?
 }
 
 char	*get_next_line(int fd)
