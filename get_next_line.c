@@ -74,6 +74,6 @@ char	*get_next_line(int fd)
 		line_draft[fd] = ft_strdup("");
 	buff = NULL;
 	line = read_line(buff, line_draft, fd);
-	printf("returning line = %s\n", line );
+	// printf("returning line = %s\n", line );
 	return(line);
 }
