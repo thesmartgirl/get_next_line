@@ -6,7 +6,7 @@
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:27:49 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/12 17:50:13 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/20 17:07:44 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE BUFSIZ
+#  define BUFFER_SIZE 1024
 # endif
 
-char			*get_next_line(int fd);
-int				ft_strlen(char *str);
-char	    *ft_strchr(const char *s, int c);
-char			*ft_strdup(char *original);
-char			*ft_strjoin(char *s1, char *s2);
-char			*ft_substr(char *str, int start, int max);
+char	*get_next_line(int fd);
+int		ft_strlen(char *str);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(char *original);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *str, int start, int max);
 
 #endif

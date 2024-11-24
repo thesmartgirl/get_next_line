@@ -6,7 +6,7 @@
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:28:02 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/08 19:28:08 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/20 18:50:00 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strchr(const char *s, int c)
 
 	cc = (char)c;
 	i = 0;
-	if(s == NULL)
+	if (s == NULL)
 		return (NULL);
 	while (s[i])
 	{

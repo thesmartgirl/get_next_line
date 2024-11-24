@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:27:42 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/12 17:49:58 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/24 12:09:34 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static void cleanup_fd(char **line_draft, int fd)
+static void	cleanup_fd(char **line_draft, int fd)
 {
-	if(line_draft[fd])
+	if (line_draft[fd])
 	{
 		free(line_draft[fd]);
 		line_draft[fd] = NULL;
@@ -24,14 +24,13 @@ static void cleanup_fd(char **line_draft, int fd)
 static char	*extract_line(char **line_draft, int fd)
 {
 	char	*line;
-	int nl;
+	int		nl;
 
 	if (!line_draft[fd])
 		return (NULL);
 	nl = 0;
-	while (line_draft[fd][nl] != '\n' && line_draft[fd][nl] !='\0') {
+	while (line_draft[fd][nl] != '\n' && line_draft[fd][nl] != '\0')
 		nl++;
-	}
 	if (nl == 0 && line_draft[fd][0] != '\n')
 	{
 		if (ft_strlen(line_draft[fd]) == 0)
@@ -47,18 +46,18 @@ static char	*extract_line(char **line_draft, int fd)
 		cleanup_fd(line_draft, fd);
 		return (NULL);
 	}
-		return (line);
+	return (line);
 }
 
-static char *update_line_draft(char **line_draft, int fd, char *line)
+static char	*update_line_draft(char **line_draft, int fd, char *line)
 {
 	char	*tmp;
 
 	tmp = line_draft[fd];
 	line_draft[fd] = ft_substr(tmp, ft_strlen(line), (ft_strlen(line_draft[fd])
-		- ft_strlen(line)));
+				- ft_strlen(line)));
 	free(tmp);
-	return line_draft[fd];
+	return (line_draft[fd]);
 }
 
 static char	*read_line(char *buff, char **line_draft, int fd)
@@ -74,17 +73,17 @@ static char	*read_line(char *buff, char **line_draft, int fd)
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(line_draft[fd], '\n'))
 	{
-			bytes_read = read(fd, buff, BUFFER_SIZE);
-			if (bytes_read == -1)
-			{
-				free(buff);
-				cleanup_fd(line_draft, fd);
-				return (NULL);
-			}
-			if (bytes_read == 0)
-				break;
-			buff[bytes_read] = '\0';
-			line_draft[fd] = ft_strjoin(line_draft[fd], buff);
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+			free(buff);
+			cleanup_fd(line_draft, fd);
+			return (NULL);
+		}
+		if (bytes_read == 0)
+			break ;
+		buff[bytes_read] = '\0';
+		line_draft[fd] = ft_strjoin(line_draft[fd], buff);
 	}
 	free(buff);
 	return ("OK");
@@ -94,9 +93,9 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	static char	*line_draft[1024];
-	char *line;
-	line = NULL;
+	char		*line;
 
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (line_draft[fd] == NULL)
@@ -107,5 +106,7 @@ char	*get_next_line(int fd)
 		line = extract_line(line_draft, fd);
 		line_draft[fd] = update_line_draft(line_draft, fd, line);
 	}
-	return(line);
+	if (ft_strlen(line_draft[fd]) == 0)
+		cleanup_fd(line_draft, fd);
+	return (line);
 }
