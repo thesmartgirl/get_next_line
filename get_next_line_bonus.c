@@ -6,7 +6,7 @@
 /*   By: ataan <ataan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:27:42 by ataan             #+#    #+#             */
-/*   Updated: 2024/11/24 12:09:34 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/19 09:04:42 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,5 @@ char	*get_next_line(int fd)
 		line = extract_line(line_draft, fd);
 		line_draft[fd] = update_line_draft(line_draft, fd, line);
 	}
-	if (ft_strlen(line_draft[fd]) == 0)
-		cleanup_fd(line_draft, fd);
 	return (line);
 }
